@@ -1,0 +1,18 @@
+{
+  "experience": [
+    {
+      "company": "JP Morgan Chase",
+      "role": "Software Engineering Intern",
+      "location": "New York, NY",
+      "startDate": "June 2024",
+      "endDate": "August 2024",
+      "summary": "Built a dashboard that helped interns understand and manage their financial goals effectively.",
+      "description": [
+        "Developed a React-based dashboard to visualize financial metrics and goals.",
+        "Automated data aggregation pipelines using Python to reduce manual reporting by 80%.",
+        "Collaborated with cross-functional teams to ensure data accuracy and timely delivery."
+      ],
+      "skills": ["React", "TypeScript", "Python", "REST APIs", "Data Visualization", "TailwindCSS"]
+    }
+  ]
+}

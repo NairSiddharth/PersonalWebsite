@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "portfolio",
+    "description": "My personal portfolio website built with React, Tailwind, and Cloudflare Pages.",
+    "html_url": "https://github.com/<your-username>/portfolio",
+    "status": "Active",
+    "tags": ["TypeScript", "Next.js", "Tailwind"]
+  },
+  {
+    "id": 2,
+    "name": "awesome-project",
+    "description": "A full-stack project demonstrating API integration and modern frontend patterns.",
+    "html_url": "https://github.com/<your-username>/awesome-project",
+    "status": "In Progress",
+    "tags": ["Python", "FastAPI", "PostgreSQL", "Docker"]
+  },
+  {
+    "id": 3,
+    "name": "blog",
+    "description": "Static blog built with Next.js, styled-components, and MDX.",
+    "html_url": "https://github.com/<your-username>/blog",
+    "status": "Archived",
+    "tags": ["JavaScript", "Next.js", "MDX"]
+  }
+]
