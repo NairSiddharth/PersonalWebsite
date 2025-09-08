@@ -4,6 +4,12 @@ import Projects from "@/sections/Projects";
 import Experience from "@/sections/Experience";
 import Contact from "@/sections/Contact";
 
+// Server Component: metadata allowed here
+export const metadata = {
+  title: "Siddharth Nair Portfolio",
+  description: "Personal portfolio and resume website",
+};
+
 export default function Home() {
   return (
     <main className="space-y-16">

@@ -2,30 +2,32 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { getDocument, GlobalWorkerOptions, PDFDocumentProxy } from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 import { ArrowDown } from "lucide-react";
 
-// PDF.js worker
-GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-// Local PDF in public folder
 const RESUME_URL = "/Siddharth_Nair_Resume.pdf";
 
 export default function Resume() {
-  const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null);
   const [loading, setLoading] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Load PDF
   useEffect(() => {
+    let pdfjs: any;
+    let getDocument: any;
+    let GlobalWorkerOptions: any;
+
     const loadPdf = async () => {
       try {
-        const loadedPdf = await getDocument(RESUME_URL).promise;
-        setPdf(loadedPdf);
+        // Import PDF.js dynamically
+        pdfjs = await import("pdfjs-dist");
+        getDocument = pdfjs.getDocument;
+        GlobalWorkerOptions = pdfjs.GlobalWorkerOptions;
 
-        // Render the single page
+        // Set worker via CDN
+        GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${(pdfjs as any).version || "3.11.313"}/pdf.worker.min.js`;
+
+        const loadedPdf = await getDocument(RESUME_URL).promise;
+
         if (loadedPdf.numPages > 0) {
           const page = await loadedPdf.getPage(1);
           if (!canvasRef.current || !containerRef.current) return;
@@ -44,8 +46,8 @@ export default function Resume() {
 
           await page.render({ canvas, canvasContext: context, viewport: scaledViewport }).promise;
         }
-      } catch (error) {
-        console.error("Error loading PDF:", error);
+      } catch (err) {
+        console.error("Error loading PDF:", err);
       } finally {
         setLoading(false);
       }
@@ -54,7 +56,6 @@ export default function Resume() {
     loadPdf();
   }, []);
 
-  // Download PDF
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = RESUME_URL;
@@ -63,7 +64,7 @@ export default function Resume() {
   };
 
   return (
-    <section className="space-y-6 py-12 px-6 max-w-4xl mx-auto">
+    <section id="resume" className="space-y-6 py-12 px-6 max-w-4xl mx-auto">
       <h2 className="font-heading text-3xl text-center">Resume</h2>
       <p className="font-body text-base text-center">
         Preview my resume below or download a copy.
@@ -73,14 +74,16 @@ export default function Resume() {
         ref={containerRef}
         className="relative w-full border rounded-lg overflow-hidden mb-4"
       >
-        {loading && (
-          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-        )}
+        {loading && <div className="absolute inset-0 bg-gray-200 animate-pulse" />}
         <canvas ref={canvasRef} className="w-full" />
       </div>
 
       <div className="flex justify-center mt-2">
-        <Button onClick={handleDownload} variant="secondary" className="flex items-center gap-2">
+        <Button
+          onClick={handleDownload}
+          variant="secondary"
+          className="flex items-center gap-2"
+        >
           <ArrowDown className="w-4 h-4" />
           Download Resume
         </Button>

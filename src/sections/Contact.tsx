@@ -5,7 +5,7 @@ import profile from "@/data/profile.json";
 
 export default function Contact() {
   return (
-    <section className="py-12 px-6 max-w-3xl mx-auto text-center">
+    <section id="contact" className="py-12 px-6 max-w-3xl mx-auto text-center">
       {/* Contact Section */}
       <h2 className="text-3xl font-bold mb-2">Let’s Connect</h2>
 

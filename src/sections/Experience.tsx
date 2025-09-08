@@ -27,7 +27,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section className="space-y-8">
+    <section id="experience" className="space-y-8">
       <h2 className="font-heading text-3xl">Experience</h2>
 
       {experiences.map((exp, index) => {
