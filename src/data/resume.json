@@ -1,18 +1,109 @@
 {
   "experience": [
     {
-      "company": "JP Morgan Chase",
+      "company": "JPMorganChase",
       "role": "Software Engineering Intern",
-      "location": "New York, NY",
+      "location": "Plano, TX",
+      "startDate": "June 2025",
+      "endDate": "August 2025",
+      "summary": "Delivered multiple large-scale initiatives impacting 1,000+ engineers and 85M+ customers through scalable infrastructure and AI-powered tools.",
+      "description": [
+        "Built Infrastructure-as-Code for 100+ Akamai CDN properties by automating their export into Terraform modules with dynamic.tfvars.",
+        "Developed a multimodal data ingestion pipeline for an Agentic AI RAG application, enhancing search across architectural documentation with role-specific prompt engineering and Reciprocal Rank Fusion.",
+        "Implemented a Redis cache POC for frequently queried vector embeddings, reducing time taken for FAQ retrieval.",
+        "Architected an MCP-based search layer to abstract low-level vector DB queries, enabling AI agents to perform standardized hybrid retrieval with extensibility and enterprise-scale usability."
+      ],
+      "skills": [
+        "Python", "TypeScript", "REST APIs", "Data Visualization",
+        "Terraform", "Redis", "Vector Databases", "MCP", "Prompt Engineering", "RAG"
+      ]
+    },
+    {
+      "company": "JPMorganChase",
+      "role": "Software Engineering Intern",
+      "location": "Houston, TX",
       "startDate": "June 2024",
       "endDate": "August 2024",
-      "summary": "Built a dashboard that helped interns understand and manage their financial goals effectively.",
+      "summary": "Accelerated backend operations with automation and forecasting, reducing team bug resolution time by 50%.",
       "description": [
-        "Developed a React-based dashboard to visualize financial metrics and goals.",
-        "Automated data aggregation pipelines using Python to reduce manual reporting by 80%.",
-        "Collaborated with cross-functional teams to ensure data accuracy and timely delivery."
+        "Designed web-based automation for parameterized batch jobs, streamlining environment migrations and bug resolution.",
+        "Engineered a time-series forecasting model with 5.38% SMAPE, leveraging historical data and macroeconomic indicators to improve accuracy."
       ],
-      "skills": ["React", "TypeScript", "Python", "REST APIs", "Data Visualization", "TailwindCSS"]
+      "skills": [
+        "React", "TypeScript", "Python", "REST APIs", "Data Visualization", "TailwindCSS",
+        "Time Series Forecasting", "Machine Learning"
+      ]
+    },
+    {
+      "company": "AI4All",
+      "role": "Student Teacher",
+      "location": "College Station, TX",
+      "startDate": "January 2023",
+      "endDate": "January 2024",
+      "summary": "Enabled students to develop real-world AI projects and present measurable impact through coaching and mentorship.",
+      "description": [
+        "Taught core algorithm concepts and model training techniques; coached students on showcasing project impact effectively.",
+        "Facilitated Apply AI program events and guided 4 student groups per term through project milestones, collaborating with industry partners to ensure alignment with real-world applications."
+      ],
+      "skills": [
+        "Python", "Machine Learning", "Teaching", "Project Management", "Mentorship"
+      ]
+    },
+    {
+      "company": "JPMorganChase",
+      "role": "Software Engineering Intern",
+      "location": "Houston, TX",
+      "startDate": "June 2023",
+      "endDate": "August 2023",
+      "summary": "Enhanced analytics and compliance monitoring through full-stack dashboard development, improving team decision-making.",
+      "description": [
+        "Developed a full-stack analytics dashboard for the Fundamental Review of the Trading Book team, enabling real-time evaluation of trader performance against Market Risk benchmarks.",
+        "Introduced dynamic filtering and historical drill down capabilities to enhance pattern detection and compliance analysis."
+      ],
+      "skills": [
+        "React", "TypeScript", "Python", "REST APIs", "Data Visualization", "TailwindCSS"
+      ]
+    },
+    {
+      "company": "JPMorganChase",
+      "role": "Software Engineering Intern",
+      "location": "Houston, TX",
+      "startDate": "June 2022",
+      "endDate": "August 2022",
+      "summary": "Improved ML model monitoring and control through internal tools, enabling faster deployment and operational efficiency.",
+      "description": [
+        "Created an internal alternative to Comet.com for model monitoring and control using Python and FastAPI.",
+        "Developed an interactive dashboard enabling both real-time monitoring and direct control of ML training jobs and deployment status, with live logging and visual analytics."
+      ],
+      "skills": [
+        "Python", "FastAPI", "React", "TypeScript", "REST APIs", "Data Visualization", "TailwindCSS"
+      ]
+    },
+    {
+      "company": "Lumen Technologies",
+      "role": "Software Engineering Intern",
+      "location": "Houston, TX",
+      "startDate": "June 2021",
+      "endDate": "August 2021",
+      "summary": "Streamlined database operations and reporting by automating data pipelines and ensuring system stability.",
+      "description": [
+        "Engineered a Python program to generate daily flat files from database inputs for logging and reporting.",
+        "Implemented monthly database resets with shell scripts to prevent data over-accumulation and maintain system performance."
+      ],
+      "skills": [
+        "Python", "Shell Scripting", "SQL", "Data Pipelines"
+      ]
     }
+  ],
+  "skills": [
+    "Python", "SQL (Oracle, Postgres, MySQL)", "Java", "JavaScript", "TypeScript", "Bash",
+    "ETL", "Data Pipelines", "Vector Databases", "Relational & Non-Relational Databases",
+    "Pandas", "scikit-learn", "AWS", "Sagemaker", "Generative AI (OpenAI, LangChain, LangGraph)",
+    "Pydantic", "MCP", "REST APIs", "FastAPI", "Spring Boot", "Microservices",
+    "React", "HTML5", "CSS", "Plotly", "Seaborn", "Voila", "Figma",
+    "DevOps & Infrastructure: AWS, Azure, Terraform, Git, CI/CD, Redis",
+    "Methodologies & Tools: Agile Methodology, Waterfall, Jira, Confluence, Playwright, AWS CloudWatch",
+    "TailwindCSS", "Time Series Forecasting", "Machine Learning", "Prompt Engineering",
+    "RAG", "Teaching", "Project Management", "Mentorship", "Terraform", "Redis", "FastAPI", "Shell Scripting"
   ]
 }
