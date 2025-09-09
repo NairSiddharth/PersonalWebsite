@@ -6,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-
+import { AccessibilityToolbar } from "@/components/accessibility-toolbar";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -21,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps) {
             <main className="flex-1 pt-24">{children}</main>
           </TooltipProvider>
           <Footer />
+          <AccessibilityToolbar />
         </ThemeProvider>
       </body>
     </html>

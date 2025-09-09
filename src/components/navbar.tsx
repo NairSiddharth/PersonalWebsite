@@ -1,7 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,28 +14,42 @@ import {
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "/" },
+  { label: "About", href: "/" },
   { label: "Resume", href: "/resume" },
   { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/projects" },
+  { label: "Offscreen", href: "/ensemble" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Function to check if link is active
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <nav className="fixed top-0 w-full backdrop-blur bg-background/70 z-50 border-b border-border p-4 flex justify-between items-center">
       {/* Left: Dark Mode Toggle */}
       <div className="flex items-center gap-2">
         <ModeToggle />
-        <span className="font-bold text-lg hidden sm:inline">Siddharth Nair</span>
       </div>
 
       {/* Right: Desktop Links */}
       <div className="hidden md:flex items-center gap-4">
         {navLinks.map((link) => (
           <Link key={link.href} href={link.href}>
-            <Button variant="ghost">{link.label}</Button>
+            <Button 
+              variant={isActive(link.href) ? "default" : "ghost"}
+              className={isActive(link.href) ? "bg-primary text-primary-foreground" : ""}
+            >
+              {link.label}
+            </Button>
           </Link>
         ))}
       </div>
@@ -57,8 +71,10 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
               <Button
-                variant="ghost"
-                className="w-full justify-start"
+                variant={isActive(link.href) ? "default" : "ghost"}
+                className={`w-full justify-start ${
+                  isActive(link.href) ? "bg-primary text-primary-foreground" : ""
+                }`}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
