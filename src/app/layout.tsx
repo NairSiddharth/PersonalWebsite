@@ -1,5 +1,6 @@
 "use client";
 
+import "../styles/globals.css"; // Add this line
 import { ReactNode } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -13,14 +14,14 @@ interface LayoutProps {
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-background text-foreground font-body transition-colors duration-300">
+      <body className="min-h-screen flex flex-col bg-background text-foreground font-body transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <TooltipProvider>
-            <main className="pt-24">{children}</main>
+            <main className="flex-1 pt-24">{children}</main>
           </TooltipProvider>
+          <Footer />
         </ThemeProvider>
-        <Footer />
       </body>
     </html>
   );
