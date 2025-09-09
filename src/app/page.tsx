@@ -14,9 +14,6 @@ export default function Home() {
   return (
     <main className="space-y-16">
       <About />
-      <Resume />
-      <Projects />
-      <Experience />
       <Contact />
     </main>
   );

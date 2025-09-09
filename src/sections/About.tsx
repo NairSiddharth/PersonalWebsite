@@ -3,13 +3,13 @@
 import profile from "@/data/profile.json";
 import resumeData from "@/data/resume.json";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function About() {
-  // Use the latest experience to determine current/previous employer
+  // Latest experience for employment text
   const latestExperience = resumeData.experience[0];
   const currentEmployer = latestExperience?.company || "";
 
-  // Determine employment text dynamically
   const employmentText =
     profile.status.toLowerCase().includes("happily employed")
       ? `Currently employed at ${currentEmployer}.`
@@ -20,11 +20,10 @@ export default function About() {
   return (
     <section className="flex flex-col items-center justify-center py-12 px-6 max-w-4xl mx-auto space-y-6 text-center">
       {/* Profile Picture */}
-      <img
-        src="/moi.jpg"
-        alt={profile.name}
-        className="w-24 h-24 sm:w-24 sm:h-24 rounded-full shadow-lg object-cover border-4 border-primary"
-      />
+      <Avatar className="w-24 h-24 sm:w-24 sm:h-24 border-4 border-primary shadow-lg">
+        <AvatarImage src="/moi.jpg" alt={profile.name} />
+        <AvatarFallback>{profile.name[0]}</AvatarFallback>
+      </Avatar>
 
       {/* Header */}
       <h1 className="text-4xl font-bold">Who Am I?</h1>
