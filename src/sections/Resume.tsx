@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
 const RESUME_URL = "/Siddharth_Nair_Resume.pdf";
 
 export default function Resume() {
-  const [loading, setLoading] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let pdfjs: any;
@@ -18,34 +18,34 @@ export default function Resume() {
 
     const loadPdf = async () => {
       try {
-        // Import PDF.js dynamically
+         // Import PDF.js dynamically
         pdfjs = await import("pdfjs-dist");
         getDocument = pdfjs.getDocument;
         GlobalWorkerOptions = pdfjs.GlobalWorkerOptions;
 
-        // Set worker via CDN
-        GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${(pdfjs as any).version || "3.11.313"}/pdf.worker.min.js`;
+        // Use PDF.js CDN worker
+        GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${
+          pdfjs.version || "3.11.313"
+        }/pdf.worker.min.js`;
 
-        const loadedPdf = await getDocument(RESUME_URL).promise;
+        const pdf = await getDocument(RESUME_URL).promise;
+        const page = await pdf.getPage(1);
 
-        if (loadedPdf.numPages > 0) {
-          const page = await loadedPdf.getPage(1);
-          if (!canvasRef.current || !containerRef.current) return;
+        if (!canvasRef.current || !containerRef.current) return;
 
-          const containerWidth = containerRef.current.clientWidth;
-          const viewport = page.getViewport({ scale: 1 });
-          const scale = containerWidth / viewport.width;
-          const scaledViewport = page.getViewport({ scale });
+        const containerWidth = containerRef.current.clientWidth;
+        const viewport = page.getViewport({ scale: 1 });
+        const scale = containerWidth / viewport.width;
+        const scaledViewport = page.getViewport({ scale });
 
-          const canvas = canvasRef.current;
-          const context = canvas.getContext("2d");
-          if (!context) return;
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+        if (!context) return;
 
-          canvas.width = scaledViewport.width;
-          canvas.height = scaledViewport.height;
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
 
-          await page.render({ canvas, canvasContext: context, viewport: scaledViewport }).promise;
-        }
+        await page.render({ canvas, canvasContext: context, viewport: scaledViewport }).promise;
       } catch (err) {
         console.error("Error loading PDF:", err);
       } finally {

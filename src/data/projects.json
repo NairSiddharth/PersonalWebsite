@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "name": "portfolio",
-    "description": "My personal portfolio website built with React, Tailwind, and Cloudflare Pages.",
-    "html_url": "https://github.com/<your-username>/portfolio",
-    "status": "Active",
-    "tags": ["TypeScript", "Next.js", "Tailwind"]
+    "name": "Personal Website",
+    "description": "My personal portfolio website built with React, Tailwind, and Cloudflare Pages to keep in touch with frontend skills & have something to show for it.",
+    "html_url": "https://github.com/NairSiddharth/PersonalWebsite",
+    "status": "In Progress",
+    "tags": ["TypeScript", "Next.js", "Tailwind", "React", "Node.js"]
   },
   {
     "id": 2,
-    "name": "awesome-project",
-    "description": "A full-stack project demonstrating API integration and modern frontend patterns.",
-    "html_url": "https://github.com/<your-username>/awesome-project",
+    "name": "oWAR",
+    "description": "Personal project aimed at analyzing and projecting baseball player performance. It calculates metrics similar to fWAR and bWAR, employing data parsing and traditional machine learning algorithms to assess player value.",
+    "html_url": "https://github.com/NairSiddharth/oWAR",
     "status": "In Progress",
-    "tags": ["Python", "FastAPI", "PostgreSQL", "Docker"]
+    "tags": ["Python", "scikit-learn", "Jupyter", "Pandas", "Machine Learning", "Plotly"]
   },
   {
     "id": 3,
