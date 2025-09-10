@@ -23,12 +23,12 @@ const booksRead = [
 ];
 
 const internshipPhotos = [
-  { src: "/internship-1.jpg", alt: "Team meeting at Google", company: "Google", location: "Mountain View, CA" },
-  { src: "/internship-2.jpg", alt: "Code review session", company: "Microsoft", location: "Seattle, WA" },
-  { src: "/internship-3.jpg", alt: "Office hackathon", company: "Meta", location: "Menlo Park, CA" },
-  { src: "/internship-4.jpg", alt: "Team lunch", company: "Apple", location: "Cupertino, CA" },
-  { src: "/internship-5.jpg", alt: "Presentation day", company: "Netflix", location: "Los Angeles, CA" },
-  { src: "/internship-6.jpg", alt: "Team building event", company: "Amazon", location: "Austin, TX" },
+  { src: "/863.JPG", alt: "Internship First Day - 1st summer", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1339.JPG", alt: "Returning Interns @ Minigolf - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1355.JPG", alt: "End of Internship Presentation - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1361.JPG", alt: "Pic. w/ other interns on our floor - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
+  // { src: "/1606.jpg", alt: "End of internship Celebration - 3rd summer pt. 1", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1591.jpg", alt: "End of Internship Celebration - 3rd summer pt. 2", company: "JPMorganChase", location: "Houston, TX" },
 ];
 
 const StarRating = ({ rating }: { rating: number }) => {
@@ -57,8 +57,8 @@ export default function Personal() {
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-heading font-bold">Beyond the Code</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          A glimpse into my life outside of programming - the movies that inspired me, 
-          books that shaped my thinking, and memories from incredible internship experiences.
+          A glimpse into my life outside of programming - the movies and books I've consumed this year, 
+            and special memories from my incredible work experiences and general life adventures!
         </p>
       </div>
 
@@ -124,11 +124,11 @@ export default function Personal() {
           {internshipPhotos.map((photo, index) => {
             // Define different sizes and positions for collage effect
             const collageStyles = [
-              { size: "w-48 h-32", rotation: "rotate-3", position: "top-4 left-8", zIndex: "z-10" },
+              { size: "w-48 h-32", rotation: "rotate-3", position: "top-4 left-16", zIndex: "z-10" },
               { size: "w-40 h-52", rotation: "-rotate-6", position: "top-20 right-12", zIndex: "z-20" },
-              { size: "w-52 h-36", rotation: "rotate-12", position: "top-48 left-20", zIndex: "z-30" },
-              { size: "w-44 h-44", rotation: "-rotate-3", position: "top-32 right-32", zIndex: "z-40" },
-              { size: "w-56 h-40", rotation: "rotate-6", position: "top-72 left-4", zIndex: "z-50" },
+              { size: "w-52 h-50", rotation: "rotate-12", position: "top-48 left-10", zIndex: "z-30" },
+              { size: "w-48 h-48", rotation: "-rotate-3", position: "top-32 right-32", zIndex: "z-40" },
+              // { size: "w-64 h-40", rotation: "rotate-6", position: "top-72 left-12", zIndex: "z-50" },
               { size: "w-40 h-48", rotation: "-rotate-12", position: "top-64 right-8", zIndex: "z-60" }
             ];
             

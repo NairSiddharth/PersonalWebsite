@@ -4,8 +4,8 @@
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Plano, TX",
-      "startDate": "June 2025",
-      "endDate": "August 2025",
+      "startDate": "2025-06-01",
+      "endDate": "2025-08-31",
       "summary": "Delivered multiple large-scale initiatives impacting 1,000+ engineers and 85M+ customers through scalable infrastructure and AI-powered tools.",
       "description": [
         "Built Infrastructure-as-Code for 100+ Akamai CDN properties by automating their export into Terraform modules with dynamic.tfvars.",
@@ -19,14 +19,29 @@
       ]
     },
     {
+      "company": "Texas A&M University",
+      "role": "Intramural Sports Official/Supervisor",
+      "location": "College Station, TX",
+      "startDate": "2023-01-01",
+      "endDate": "2024-12-31",
+      "summary": "Contributed to managing intramural flag football operations for 14,000+ participants per semester, managing referee teams, and supervising tournaments while officiating games.",
+      "description": [
+        "Coached referees through targeted training and one-on-one mentoring, with several advancing to supervisory roles.",
+        "Recognized for conflict management and rules knowledge; selected to officiate special events and regional tournaments."
+      ],
+      "skills": [
+        "Conflict Management", "Teaching", "Project Management", "Mentorship"
+      ]
+    },
+    {
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
-      "startDate": "June 2024",
-      "endDate": "August 2024",
+      "startDate": "2024-06-01",
+      "endDate": "2024-08-31",
       "summary": "Accelerated backend operations with automation and forecasting, reducing team bug resolution time by 50%.",
       "description": [
-        "Designed web-based automation for parameterized batch jobs, streamlining environment migrations and bug resolution.",
+        "Designed web-based automation for parameterized batch jobs, streamlining environment migrations and bug resolution downstream.",
         "Engineered a time-series forecasting model with 5.38% SMAPE, leveraging historical data and macroeconomic indicators to improve accuracy."
       ],
       "skills": [
@@ -38,8 +53,8 @@
       "company": "AI4All",
       "role": "Student Teacher",
       "location": "College Station, TX",
-      "startDate": "January 2023",
-      "endDate": "January 2024",
+      "startDate": "2023-01-01",
+      "endDate": "2024-01-31",
       "summary": "Enabled students to develop real-world AI projects and present measurable impact through coaching and mentorship.",
       "description": [
         "Taught core algorithm concepts and model training techniques; coached students on showcasing project impact effectively.",
@@ -53,8 +68,8 @@
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
-      "startDate": "June 2023",
-      "endDate": "August 2023",
+      "startDate": "2023-06-01",
+      "endDate": "2023-08-31",
       "summary": "Enhanced analytics and compliance monitoring through full-stack dashboard development, improving team decision-making.",
       "description": [
         "Developed a full-stack analytics dashboard for the Fundamental Review of the Trading Book team, enabling real-time evaluation of trader performance against Market Risk benchmarks.",
@@ -68,8 +83,8 @@
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
-      "startDate": "June 2022",
-      "endDate": "August 2022",
+      "startDate": "2022-06-01",
+      "endDate": "2022-08-31",
       "summary": "Improved ML model monitoring and control through internal tools, enabling faster deployment and operational efficiency.",
       "description": [
         "Created an internal alternative to Comet.com for model monitoring and control using Python and FastAPI.",
@@ -83,8 +98,8 @@
       "company": "Lumen Technologies",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
-      "startDate": "June 2021",
-      "endDate": "August 2021",
+      "startDate": "2021-06-01",
+      "endDate": "2021-08-31",
       "summary": "Streamlined database operations and reporting by automating data pipelines and ensuring system stability.",
       "description": [
         "Engineered a Python program to generate daily flat files from database inputs for logging and reporting.",
@@ -95,15 +110,33 @@
       ]
     }
   ],
-  "skills": [
-    "Python", "SQL (Oracle, Postgres, MySQL)", "Java", "JavaScript", "TypeScript", "Bash",
-    "ETL", "Data Pipelines", "Vector Databases", "Relational & Non-Relational Databases",
-    "Pandas", "scikit-learn", "AWS", "Sagemaker", "Generative AI (OpenAI, LangChain, LangGraph)",
-    "Pydantic", "MCP", "REST APIs", "FastAPI", "Spring Boot", "Microservices",
-    "React", "HTML5", "CSS", "Plotly", "Seaborn", "Voila", "Figma",
-    "DevOps & Infrastructure: AWS, Azure, Terraform, Git, CI/CD, Redis",
-    "Methodologies & Tools: Agile Methodology, Waterfall, Jira, Confluence, Playwright, AWS CloudWatch",
-    "TailwindCSS", "Time Series Forecasting", "Machine Learning", "Prompt Engineering",
-    "RAG", "Teaching", "Project Management", "Mentorship", "Terraform", "Redis", "FastAPI", "Shell Scripting"
-  ]
+  "skillCategories": {
+    "Languages": [
+      "Python", "SQL", "Oracle", "Postgres", "MySQL", "Java", 
+      "JavaScript", "TypeScript", "Bash"
+    ],
+    "Data Engineering & ML": [
+      "ETL", "Data Pipelines", "Vector Databases", 
+      "Relational & Non-Relational Databases", "Pandas", 
+      "scikit-learn", "AWS", "Sagemaker", "Generative AI", 
+      "OpenAI", "LangChain", "LangGraph", "Pydantic", "MCP",
+      "Machine Learning", "Time Series Forecasting", "Prompt Engineering", "RAG"
+    ],
+    "Backend & APIs": [
+      "REST APIs", "FastAPI", "Spring Boot", "Microservices", "Node.js"
+    ],
+    "Frontend & Visualization": [
+      "React", "HTML5", "CSS", "TailwindCSS", "Plotly", 
+      "Seaborn", "Voila", "Figma", "Data Visualization"
+    ],
+    "DevOps & Infrastructure": [
+      "AWS", "Azure", "Terraform", "Git", "CI/CD", "Redis", 
+      "AWS S3", "AWS Lambda", "AWS Aurora", "AWS RDS", "Shell Scripting"
+    ],
+    "Methodologies & Tools": [
+      "Agile Methodology", "Waterfall", "Jira", "Confluence", 
+      "Playwright", "AWS CloudWatch", "Teaching", "Project Management", 
+      "Mentorship", "Conflict Management"
+    ]
+  }
 }
