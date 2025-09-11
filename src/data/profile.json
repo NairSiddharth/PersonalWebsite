@@ -3,5 +3,6 @@
   "email": "nair.sidwork@gmail.com",
   "linkedin": "siddharthnair01",
   "status": "Actively Looking",
-  "summary": "I’m a software engineer passionate about building scalable web applications..."
+  "summary": "I am currently seeking full-time software engineering opportunities where I can apply my background in Python, full-stack development, and data/AI systems to build reliable and impactful technology.\n\n Over the course of five internships, including four at JPMorgan Chase, I developed scalable pipelines, backend services, and machine learning models that supported forecasting, analytics, and summarization. My recent work includes applying generative AI techniques, from prompt design to model tuning, to power ingestion pipelines that transform documents, images, and presentations into structured insights.\n\n Beyond data and AI, I have built web applications with React, Node.js, and Java, and I have used Terraform to automate and manage cloud infrastructure. Bringing these areas together, I focus on designing software systems that are technically sound and deliver real-world impact.",
+  "github": "NairSiddharth"
 }

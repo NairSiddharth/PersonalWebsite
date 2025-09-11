@@ -13,8 +13,21 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="space-y-16">
+      {/* Hero Section - Full Width About
       <About />
-      <Contact />
+      
+      {/* Contact Section - Can be full width or constrained */}
+      {/* <Contact /> */} 
+      
+      {/* Alternative Layout Option: Side by Side
+          Uncomment below and comment out above to use side-by-side layout */}
+      
+      { <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 max-w-7xl mx-auto px-6">
+        <About />
+        <Contact />
+      </div> }
+      
+
     </main>
   );
 }

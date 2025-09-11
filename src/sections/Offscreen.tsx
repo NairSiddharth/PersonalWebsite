@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Book, Film, Camera, MapPin, Heart } from "lucide-react";
+import { Book, Film, Camera, Heart, Music } from "lucide-react";
 
 // TMDB API Configuration
 const TMDB_API_KEY = 'd8864e8ea68d42b670a7a43a9bc7cdf6';
@@ -77,7 +77,113 @@ const BookCover = ({ isbn, title }: { isbn: number, title: string }) => {
   );
 };
 
-// Sample data - replace with your actual data
+// Component to display Spotify tracks
+const SpotifyTopTracks = () => {
+  const [tracks, setTracks] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTopTracks = async () => {
+      // Using mock data - replace with your actual top tracks
+      // To use real Spotify API, you need OAuth authentication
+      const mockTracks = [
+        {
+          name: "Flowers",
+          artists: [{ name: "Miley Cyrus" }],
+          album: {
+            name: "Endless Summer Vacation",
+            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02b9b5e18e5a6e0e62e0a8b3c0" }]
+          }
+        },
+        {
+          name: "Kill Bill",
+          artists: [{ name: "SZA" }],
+          album: {
+            name: "SOS",
+            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02e3c0a7e8e6b92c3e5dc5db17" }]
+          }
+        },
+        {
+          name: "Unholy",
+          artists: [{ name: "Sam Smith" }, { name: "Kim Petras" }],
+          album: {
+            name: "Gloria",
+            images: [{ url: "https://i.scdn.co/image/ab67616d00001e027d9fe17c3d8e9b5e1e0d5f7e" }]
+          }
+        },
+        {
+          name: "As It Was",
+          artists: [{ name: "Harry Styles" }],
+          album: {
+            name: "Harry's House",
+            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02b46f74097655d7f353caab14" }]
+          }
+        },
+        {
+          name: "Anti-Hero",
+          artists: [{ name: "Taylor Swift" }],
+          album: {
+            name: "Midnights",
+            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02e0b60c608586d88252b8fbc0" }]
+          }
+        }
+      ];
+      
+      setTracks(mockTracks);
+      setLoading(false);
+    };
+
+    fetchTopTracks();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="space-y-2">
+            <div className="aspect-square bg-muted animate-pulse rounded-lg" />
+            <div className="h-4 bg-muted animate-pulse rounded" />
+            <div className="h-3 bg-muted animate-pulse rounded w-3/4" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {tracks.map((track, index) => (
+        <Card key={index} className="overflow-hidden hover:shadow-lg transition-all group">
+          <div className="relative aspect-square">
+            <img 
+              src={track.album.images[0]?.url || "/placeholder-album.jpg"}
+              alt={`${track.album.name} cover`}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute bottom-2 left-2 right-2">
+                <Music className="w-4 h-4 text-white/80" />
+              </div>
+            </div>
+          </div>
+          <CardContent className="p-3 space-y-1">
+            <h4 className="font-semibold text-sm line-clamp-1" title={track.name}>
+              {track.name}
+            </h4>
+            <p className="text-xs text-muted-foreground line-clamp-1" title={track.artists.map((a: any) => a.name).join(', ')}>
+              {track.artists.map((a: any) => a.name).join(', ')}
+            </p>
+            <p className="text-xs text-muted-foreground/70 line-clamp-1" title={track.album.name}>
+              {track.album.name}
+            </p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+};
+
+// Data
 const moviesWatched = [
   { title: "The Naked Gun", year: 2025, rating: 4, genre: "Comedy", id: 1035259 },
   { title: "Superman", year: 2025, rating: 4, genre: "Superhero", id: 1061474 },
@@ -106,7 +212,6 @@ const internshipPhotos = [
   { src: "/TFKU7150.jpg", alt: "Internship Group - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
 ];
 
-// Add your life adventures photos here
 const lifeAdventurePhotos = [
   { src: "/IMG_4905.jpg", alt: "Best bowl ramen I've had to this day, mala sensation goes crazy", location: "Ooink Ramen", description: "Best bowl ramen I've had to this day, mala sensation goes crazy" },
   { src: "/IMG_5118.jpg", alt: "Pretty baseball park", location: "T-Mobile Park", description: "Pretty baseball park" },
@@ -139,7 +244,7 @@ const StarRating = ({ rating }: { rating: number }) => {
   );
 };
 
-// Photo collage component with better layout and image protection
+// Photo collage component
 const PhotoCollage = ({ 
   photos, 
   title, 
@@ -153,10 +258,8 @@ const PhotoCollage = ({
 }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
-  // Grid layouts optimized for the actual number of photos with better spacing
   const getCollageStyles = (index: number, layout: string, totalPhotos: number) => {
     if (layout === "default") {
-      // Layout for internship photos (9 photos) - organized in a 3x3 grid pattern
       const styles = [
         { size: "w-40 h-32", rotation: "rotate-2", position: "top-4 left-4", zIndex: "z-10" },
         { size: "w-36 h-44", rotation: "-rotate-3", position: "top-4 left-1/2 -translate-x-1/2", zIndex: "z-20" },
@@ -170,7 +273,6 @@ const PhotoCollage = ({
       ];
       return styles[index % styles.length];
     } else {
-      // Layout for life adventure photos (12 photos) - organized in a 4x3 grid pattern
       const styles = [
         { size: "w-36 h-32", rotation: "-rotate-2", position: "top-4 left-2", zIndex: "z-10" },
         { size: "w-32 h-40", rotation: "rotate-1", position: "top-4 left-1/3", zIndex: "z-20" },
@@ -196,11 +298,10 @@ const PhotoCollage = ({
         <h3 className="text-xl font-heading font-semibold">{title}</h3>
       </div>
       
-      {/* Collage Container with image protection styles */}
       <div 
         className="relative h-[500px] lg:h-[600px] bg-gradient-to-br from-muted/20 to-muted/5 rounded-xl p-4 overflow-hidden select-none"
-        onContextMenu={(e) => e.preventDefault()} // Disable right-click
-        style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // Disable text/image selection
+        onContextMenu={(e) => e.preventDefault()}
+        style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
       >
         {photos.map((photo, index) => {
           const style = getCollageStyles(index, gridLayout, photos.length);
@@ -211,13 +312,11 @@ const PhotoCollage = ({
               className={`absolute ${style.position} ${style.size} ${style.rotation} ${style.zIndex} cursor-pointer group transform transition-all duration-300 hover:scale-105 hover:z-[200]`}
               onClick={() => setSelectedPhoto(index)}
             >
-              {/* Polaroid-style frame */}
               <div className="w-full h-full bg-white p-1.5 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:rotate-0">
                 <div 
                   className="w-full h-4/5 overflow-hidden bg-muted relative"
-                  draggable="false" // Disable drag
+                  draggable="false"
                 >
-                  {/* Image with protection overlay */}
                   <div className="absolute inset-0 z-10" style={{ pointerEvents: 'none' }}></div>
                   <img
                     src={photo.src}
@@ -232,7 +331,6 @@ const PhotoCollage = ({
                     }}
                   />
                 </div>
-                {/* Polaroid caption area */}
                 <div className="h-1/5 flex items-center justify-center px-1">
                   <div className="text-center">
                     <p className="text-[10px] font-semibold text-gray-800 truncate px-1">
@@ -242,7 +340,6 @@ const PhotoCollage = ({
                 </div>
               </div>
               
-              {/* Tape/sticker accents */}
               {(index % 3 === 0) && (
                 <div className="absolute -top-2 -right-2 w-6 h-3 bg-yellow-200 opacity-70 rotate-45 shadow-sm"></div>
               )}
@@ -256,17 +353,14 @@ const PhotoCollage = ({
           );
         })}
         
-        {/* Scattered decorative elements */}
         <div className="absolute top-12 right-16 w-2 h-2 bg-primary/30 rounded-full"></div>
         <div className="absolute bottom-16 left-12 w-2 h-2 bg-secondary/40 rounded-full"></div>
         <div className="absolute top-1/2 right-1/4 w-3 h-1 bg-muted-foreground/20 rotate-45"></div>
         
-        {/* Corner decorations */}
         <div className="absolute top-0 right-0 w-12 h-12 bg-yellow-100/50 opacity-70 rotate-45 transform translate-x-6 -translate-y-6"></div>
         <div className="absolute bottom-0 left-0 w-16 h-16 bg-blue-100/30 opacity-60 rotate-45 transform -translate-x-8 translate-y-8"></div>
       </div>
 
-      {/* Photo Modal with protection */}
       {selectedPhoto !== null && (
         <div 
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 select-none"
@@ -274,7 +368,6 @@ const PhotoCollage = ({
           onContextMenu={(e) => e.preventDefault()}
         >
           <div className="relative max-w-4xl max-h-full">
-            {/* Invisible overlay to prevent right-click save */}
             <div className="absolute inset-0 z-10" style={{ pointerEvents: 'auto' }} onClick={() => setSelectedPhoto(null)}></div>
             <img
               src={photos[selectedPhoto].src}
@@ -372,6 +465,17 @@ export default function Personal() {
         </div>
       </section>
 
+      {/* Music Section - Spotify Top Tracks */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Music className="w-6 h-6 text-primary" />
+          <h2 className="text-2xl font-heading font-semibold">Tracks I've Been Vibing To</h2>
+          <span className="text-sm text-muted-foreground">(My Top 5 - Medium Term)</span>
+        </div>
+        
+        <SpotifyTopTracks />
+      </section>
+
       {/* Photo Collages Section - Side by Side */}
       <section className="space-y-6">
         <div className="flex items-center gap-3 justify-center">
@@ -380,9 +484,7 @@ export default function Personal() {
           <Heart className="w-6 h-6 text-primary" />
         </div>
         
-        {/* Container for both collages side by side */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          {/* Internship Photos Collage */}
           <PhotoCollage 
             photos={internshipPhotos} 
             title="Internship Memories" 
@@ -390,7 +492,6 @@ export default function Personal() {
             gridLayout="default"
           />
 
-          {/* Life Adventures Photos Collage */}
           <PhotoCollage 
             photos={lifeAdventurePhotos} 
             title="Life Adventures" 
