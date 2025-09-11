@@ -6,19 +6,19 @@ import { Book, Film, Camera, MapPin, Heart } from "lucide-react";
 
 // Sample data - replace with your actual data
 const moviesWatched = [
-  { title: "The Naked Gun", year: 2025, rating: 4, genre: "Comedy" },
-  { title: "Superman", year: 2025, rating: 4, genre: "Superhero" },
-  { title: "A Working Man", year: 2025, rating: 3, genre: "Action" },
-  { title: "Thunderbolts", year: 2025, rating: 4, genre: "Superhero" },
+  { title: "The Naked Gun", year: 2025, rating: 4, genre: "Comedy", id: 1035259 },
+  { title: "Superman", year: 2025, rating: 4, genre: "Superhero", id: 1061474 },
+  { title: "A Working Man", year: 2025, rating: 3, genre: "Action", id: 1197306 },
+  { title: "Thunderbolts*", year: 2025, rating: 4, genre: "Superhero", id: 986056 },
 ];
 
 const booksRead = [
-  { title: "The Income Factory", author: "Steven Bavaria", rating: 3, category: "Investing" },
-  { title: "Wind and Truth", author: "Brandon Sanderson", rating: 5, category: "Fantasy" },
-  { title: "Psychology of Money", author: "Morgan Housel", rating: 5, category: "Personal Finance" },
-  { title: "Open", author: "Andre Agassi/J.R. Moehringer", rating: 5, category: "Memoir" },
-  { title: "A Short History of Nearly Everything", author: "Bill Bryson", rating: 5, category: "Science" },
-  { title: "Last Man Standing", author: "Duff McDonald", rating: 4, category: "Biography" },
+  { title: "The Income Factory", author: "Steven Bavaria", rating: 3, category: "Investing", isbn: 9781260458534 },
+  { title: "Wind and Truth", author: "Brandon Sanderson", rating: 5, category: "Fantasy", isbn: 9781250368287 },
+  { title: "Psychology of Money", author: "Morgan Housel", rating: 5, category: "Personal Finance", isbn: 9789390166268 },
+  { title: "Open", author: "Andre Agassi/J.R. Moehringer", rating: 5, category: "Memoir", isbn: 9780307268198},
+  { title: "A Short History of Nearly Everything", author: "Bill Bryson", rating: 5, category: "Science", isbn: 9780552997041 },
+  { title: "Last Man Standing", author: "Duff McDonald", rating: 4, category: "Biography", isbn: 9781416599531},
 ];
 
 const internshipPhotos = [
@@ -35,19 +35,20 @@ const internshipPhotos = [
 
 // Add your life adventures photos here
 const lifeAdventurePhotos = [
-  { src: "/IMG_4905.jpg", alt: "Travel adventure", location: "Best Ramen I've had @ Ooink Ramen", description: "Amazing trip" },
-  { src: "/IMG_5118.jpg", alt: "Hobby photo", location: "T-Mobile Park", description: "Fun activity" },
-  { src: "/IMG_5133.jpg", alt: "Achievement photo", location: "T-Mobile Park", description: "Special moment" },
-  { src: "/IMG_5326.jpg", alt: "Friends gathering", location: "Penberthy Fields", description: "Great memories" },
-  { src: "/IMG_5359.jpg", alt: "Personal milestone", location: "Zach. Engineering Building 1", description: "Proud moment" },
-  { src: "/IMG_5360.jpg", alt: "Personal milestone", location: "Zach. Engineering Building 2", description: "Proud moment" },
-  { src: "/IMG_5401.jpg", alt: "Personal milestone", location: "Foggy Penberthy Fields", description: "Proud moment" },
-  { src: "/IMG_5409.jpg", alt: "Personal milestone", location: "Panoramic Seattle Seascape", description: "Proud moment" },
-  { src: "/IMG_5433.jpg", alt: "Personal milestone", location: "Seattle Skyline", description: "Proud moment" },
-  { src: "/IMG_5444.jpg", alt: "Personal milestone", location: "Ramen Danbo", description: "Proud moment" },
-  { src: "/IMG_5453.jpg", alt: "Personal milestone", location: "Pike Place", description: "Proud moment" },
-  { src: "/IMG_5498.jpg", alt: "Personal milestone", location: "Best Pizza I've had @ Dino's Tomato Pie", description: "Proud moment" },
+  { src: "/IMG_4905.jpg", alt: "Travel adventure", location: "Ooink Ramen", description: "Best bowl ramen I've had to this day, mala sensation goes crazy" },
+  { src: "/IMG_5118.jpg", alt: "Hobby photo", location: "T-Mobile Park", description: "Pretty baseball park" },
+  { src: "/IMG_5133.jpg", alt: "Achievement photo", location: "T-Mobile Park", description: "Watching the Mariners" },
+  { src: "/IMG_5326.jpg", alt: "Friends gathering", location: "Penberthy Fields", description: "Some days the view made the hours worthwhile" },
+  { src: "/IMG_5359.jpg", alt: "Personal milestone", location: "Zach. Engineering Building 1", description: "Look Mom I'm a Photographer Pt. 1" },
+  { src: "/IMG_5360.jpg", alt: "Personal milestone", location: "Zach. Engineering Building 2", description: "Look Mom I'm a Photographer Pt. 2" },
+  { src: "/IMG_5401.jpg", alt: "Personal milestone", location: "Penberthy Fields", description: "Day in the life of Sid the referee" },
+  { src: "/IMG_5409.jpg", alt: "Personal milestone", location: "Panoramic Seattle Seascape", description: "Panorama of sea from Pike Place overview" },
+  { src: "/IMG_5433.jpg", alt: "Personal milestone", location: "Seattle Skyline", description: "Looking back at Seattle on way to Bainbridge Island" },
+  { src: "/IMG_5444.jpg", alt: "Personal milestone", location: "Ramen Danbo", description: "3rd Best ramen I've had" },
+  { src: "/IMG_5453.jpg", alt: "Personal milestone", location: "Pike Place", description: "Nice ambience at Pike Place after eating @ Pink Door" },
+  { src: "/IMG_5498.jpg", alt: "Personal milestone", location: "Dino's Tomato Pie", description: "Best Pizza I've had, sicilian style pies are the way to go" },
 ];
+
 
 const StarRating = ({ rating }: { rating: number }) => {
   return (
@@ -80,54 +81,66 @@ const PhotoCollage = ({
 }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
-  // Different grid layouts to prevent overlap
-  const getCollageStyles = (index: number, layout: string) => {
+  // Grid layouts optimized for the actual number of photos with better spacing
+  const getCollageStyles = (index: number, layout: string, totalPhotos: number) => {
     if (layout === "default") {
+      // Layout for internship photos (9 photos) - organized in a 3x3 grid pattern
       const styles = [
-        { size: "w-56 h-40", rotation: "rotate-2", position: "top-8 left-8", zIndex: "z-10" },
-        { size: "w-48 h-56", rotation: "-rotate-3", position: "top-8 right-8", zIndex: "z-20" },
-        { size: "w-52 h-44", rotation: "rotate-1", position: "bottom-32 left-12", zIndex: "z-30" },
-        { size: "w-60 h-48", rotation: "-rotate-2", position: "bottom-8 right-16", zIndex: "z-40" },
-        { size: "w-44 h-52", rotation: "rotate-3", position: "top-1/3 left-1/3", zIndex: "z-50" }
+        { size: "w-40 h-32", rotation: "rotate-2", position: "top-4 left-4", zIndex: "z-10" },
+        { size: "w-36 h-44", rotation: "-rotate-3", position: "top-4 left-1/2 -translate-x-1/2", zIndex: "z-20" },
+        { size: "w-40 h-36", rotation: "rotate-1", position: "top-4 right-4", zIndex: "z-30" },
+        { size: "w-44 h-36", rotation: "-rotate-2", position: "top-1/3 left-8", zIndex: "z-40" },
+        { size: "w-36 h-40", rotation: "rotate-3", position: "top-1/3 left-1/2 -translate-x-1/2", zIndex: "z-50" },
+        { size: "w-40 h-44", rotation: "-rotate-1", position: "top-1/3 right-8", zIndex: "z-60" },
+        { size: "w-36 h-36", rotation: "rotate-2", position: "bottom-24 left-4", zIndex: "z-70" },
+        { size: "w-44 h-32", rotation: "-rotate-3", position: "bottom-24 left-1/2 -translate-x-1/2", zIndex: "z-80" },
+        { size: "w-40 h-40", rotation: "rotate-1", position: "bottom-24 right-4", zIndex: "z-90" }
       ];
       return styles[index % styles.length];
     } else {
-      // Alternate layout for second collage
+      // Layout for life adventure photos (12 photos) - organized in a 4x3 grid pattern
       const styles = [
-        { size: "w-52 h-44", rotation: "-rotate-3", position: "top-12 left-1/4", zIndex: "z-10" },
-        { size: "w-56 h-48", rotation: "rotate-2", position: "bottom-12 left-8", zIndex: "z-20" },
-        { size: "w-48 h-56", rotation: "-rotate-1", position: "top-8 right-1/4", zIndex: "z-30" },
-        { size: "w-60 h-44", rotation: "rotate-3", position: "bottom-24 right-12", zIndex: "z-40" },
-        { size: "w-44 h-52", rotation: "-rotate-2", position: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2", zIndex: "z-50" }
+        { size: "w-36 h-32", rotation: "-rotate-2", position: "top-4 left-2", zIndex: "z-10" },
+        { size: "w-32 h-40", rotation: "rotate-1", position: "top-4 left-1/3", zIndex: "z-20" },
+        { size: "w-36 h-36", rotation: "-rotate-3", position: "top-4 right-1/3", zIndex: "z-30" },
+        { size: "w-32 h-32", rotation: "rotate-2", position: "top-4 right-2", zIndex: "z-40" },
+        { size: "w-40 h-32", rotation: "-rotate-1", position: "top-44 left-4", zIndex: "z-50" },
+        { size: "w-36 h-40", rotation: "rotate-3", position: "top-44 left-1/3", zIndex: "z-60" },
+        { size: "w-32 h-36", rotation: "-rotate-2", position: "top-44 right-1/3", zIndex: "z-70" },
+        { size: "w-36 h-32", rotation: "rotate-1", position: "top-44 right-4", zIndex: "z-80" },
+        { size: "w-32 h-40", rotation: "rotate-2", position: "bottom-8 left-2", zIndex: "z-90" },
+        { size: "w-40 h-36", rotation: "-rotate-3", position: "bottom-8 left-1/3", zIndex: "z-100" },
+        { size: "w-36 h-32", rotation: "rotate-1", position: "bottom-8 right-1/3", zIndex: "z-110" },
+        { size: "w-32 h-36", rotation: "-rotate-1", position: "bottom-8 right-2", zIndex: "z-120" }
       ];
       return styles[index % styles.length];
     }
   };
 
   return (
-    <section className="space-y-6">
-      <div className="flex items-center gap-3">
-        <Icon className="w-6 h-6 text-primary" />
-        <h2 className="text-2xl font-heading font-semibold">{title}</h2>
+    <div className="space-y-4">
+      <div className="flex items-center gap-2">
+        <Icon className="w-5 h-5 text-primary" />
+        <h3 className="text-xl font-heading font-semibold">{title}</h3>
       </div>
       
       {/* Collage Container with image protection styles */}
       <div 
-        className="relative min-h-[600px] md:min-h-[700px] bg-gradient-to-br from-muted/20 to-muted/5 rounded-xl p-8 overflow-hidden select-none"
+        className="relative h-[500px] lg:h-[600px] bg-gradient-to-br from-muted/20 to-muted/5 rounded-xl p-4 overflow-hidden select-none"
         onContextMenu={(e) => e.preventDefault()} // Disable right-click
         style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // Disable text/image selection
       >
         {photos.map((photo, index) => {
-          const style = getCollageStyles(index, gridLayout);
+          const style = getCollageStyles(index, gridLayout, photos.length);
           
           return (
             <div 
               key={index}
-              className={`absolute ${style.position} ${style.size} ${style.rotation} ${style.zIndex} cursor-pointer group transform transition-all duration-300 hover:scale-105`}
+              className={`absolute ${style.position} ${style.size} ${style.rotation} ${style.zIndex} cursor-pointer group transform transition-all duration-300 hover:scale-105 hover:z-[200]`}
               onClick={() => setSelectedPhoto(index)}
             >
               {/* Polaroid-style frame */}
-              <div className="w-full h-full bg-white p-2 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:rotate-0">
+              <div className="w-full h-full bg-white p-1.5 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:rotate-0">
                 <div 
                   className="w-full h-4/5 overflow-hidden bg-muted relative"
                   draggable="false" // Disable drag
@@ -150,37 +163,35 @@ const PhotoCollage = ({
                 {/* Polaroid caption area */}
                 <div className="h-1/5 flex items-center justify-center px-1">
                   <div className="text-center">
-                    <p className="text-xs font-semibold text-gray-800 truncate">
-                      {photo.company || photo.description}
+                    <p className="text-[10px] font-semibold text-gray-800 truncate px-1">
+                      {photo.location}
                     </p>
-                    <p className="text-xs text-gray-600 truncate">{photo.location}</p>
                   </div>
                 </div>
               </div>
               
               {/* Tape/sticker accents */}
               {(index % 3 === 0) && (
-                <div className="absolute -top-2 -right-2 w-8 h-4 bg-yellow-200 opacity-70 rotate-45 shadow-sm"></div>
+                <div className="absolute -top-2 -right-2 w-6 h-3 bg-yellow-200 opacity-70 rotate-45 shadow-sm"></div>
               )}
               {(index % 3 === 1) && (
-                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-12 h-3 bg-gray-300 opacity-60 shadow-sm"></div>
+                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-gray-300 opacity-60 shadow-sm"></div>
               )}
               {(index % 3 === 2) && (
-                <div className="absolute -bottom-1 -left-1 w-6 h-3 bg-blue-200 opacity-60 -rotate-12 shadow-sm"></div>
+                <div className="absolute -bottom-1 -left-1 w-5 h-2 bg-blue-200 opacity-60 -rotate-12 shadow-sm"></div>
               )}
             </div>
           );
         })}
         
         {/* Scattered decorative elements */}
-        <div className="absolute top-16 right-24 w-3 h-3 bg-primary/30 rounded-full"></div>
-        <div className="absolute bottom-24 left-16 w-2 h-2 bg-secondary/40 rounded-full"></div>
-        <div className="absolute top-1/2 right-1/3 w-4 h-1 bg-muted-foreground/20 rotate-45"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-3 h-3 bg-primary/20 rounded-full"></div>
+        <div className="absolute top-12 right-16 w-2 h-2 bg-primary/30 rounded-full"></div>
+        <div className="absolute bottom-16 left-12 w-2 h-2 bg-secondary/40 rounded-full"></div>
+        <div className="absolute top-1/2 right-1/4 w-3 h-1 bg-muted-foreground/20 rotate-45"></div>
         
         {/* Corner decorations */}
-        <div className="absolute top-0 right-0 w-16 h-16 bg-yellow-100/50 opacity-70 rotate-45 transform translate-x-8 -translate-y-8"></div>
-        <div className="absolute bottom-0 left-0 w-20 h-20 bg-blue-100/30 opacity-60 rotate-45 transform -translate-x-10 translate-y-10"></div>
+        <div className="absolute top-0 right-0 w-12 h-12 bg-yellow-100/50 opacity-70 rotate-45 transform translate-x-6 -translate-y-6"></div>
+        <div className="absolute bottom-0 left-0 w-16 h-16 bg-blue-100/30 opacity-60 rotate-45 transform -translate-x-8 translate-y-8"></div>
       </div>
 
       {/* Photo Modal with protection */}
@@ -209,19 +220,19 @@ const PhotoCollage = ({
               ×
             </button>
             <div className="absolute bottom-4 left-4 text-white z-20 pointer-events-none">
-              <h3 className="text-xl font-semibold">{photos[selectedPhoto].company || photos[selectedPhoto].description}</h3>
-              <p className="text-sm opacity-80">{photos[selectedPhoto].location}</p>
+              <h3 className="text-xl font-semibold">{photos[selectedPhoto].location}</h3>
+              <p className="text-sm opacity-80">{photos[selectedPhoto].alt}</p>
             </div>
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 
 export default function Personal() {
   return (
-    <div className="max-w-6xl mx-auto py-12 px-6 space-y-12">
+    <div className="max-w-7xl mx-auto py-12 px-6 space-y-12">
       {/* Header */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-heading font-bold">Beyond the Code</h1>
@@ -281,21 +292,33 @@ export default function Personal() {
         </div>
       </section>
 
-      {/* Internship Photos Collage */}
-      <PhotoCollage 
-        photos={internshipPhotos} 
-        title="Internship Memories" 
-        icon={Camera}
-        gridLayout="default"
-      />
+      {/* Photo Collages Section - Side by Side */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3 justify-center">
+          <Camera className="w-6 h-6 text-primary" />
+          <h2 className="text-2xl font-heading font-semibold">Memory Boards</h2>
+          <Heart className="w-6 h-6 text-primary" />
+        </div>
+        
+        {/* Container for both collages side by side */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          {/* Internship Photos Collage */}
+          <PhotoCollage 
+            photos={internshipPhotos} 
+            title="Internship Memories" 
+            icon={Camera}
+            gridLayout="default"
+          />
 
-      {/* Life Adventures Photos Collage */}
-      <PhotoCollage 
-        photos={lifeAdventurePhotos} 
-        title="Life Adventures" 
-        icon={Heart}
-        gridLayout="alternate"
-      />
+          {/* Life Adventures Photos Collage */}
+          <PhotoCollage 
+            photos={lifeAdventurePhotos} 
+            title="Life Adventures" 
+            icon={Heart}
+            gridLayout="alternate"
+          />
+        </div>
+      </section>
     </div>
   );
 }
