@@ -1,8 +1,81 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Book, Film, Camera, MapPin, Heart } from "lucide-react";
+
+// TMDB API Configuration
+const TMDB_API_KEY = 'd8864e8ea68d42b670a7a43a9bc7cdf6';
+
+// Component to fetch and display movie poster
+const MoviePoster = ({ tmdbId, title }: { tmdbId: number, title: string }) => {
+  const [posterUrl, setPosterUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPoster = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${tmdbId}?api_key=${TMDB_API_KEY}`
+        );
+        const data = await response.json();
+        
+        if (data.poster_path) {
+          setPosterUrl(`https://image.tmdb.org/t/p/w300${data.poster_path}`);
+        }
+      } catch (error) {
+        console.error('Failed to fetch movie poster:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPoster();
+  }, [tmdbId]);
+
+  if (loading) {
+    return <div className="w-full h-48 bg-muted animate-pulse rounded" />;
+  }
+
+  if (posterUrl) {
+    return (
+      <img 
+        src={posterUrl} 
+        alt={`${title} poster`}
+        className="w-full h-48 object-cover rounded"
+      />
+    );
+  }
+
+  // Fallback placeholder
+  return (
+    <div className="w-full h-48 bg-muted rounded flex items-center justify-center">
+      <Film className="w-8 h-8 text-muted-foreground" />
+    </div>
+  );
+};
+
+// Component to display book cover
+const BookCover = ({ isbn, title }: { isbn: number, title: string }) => {
+  const [imageError, setImageError] = useState(false);
+
+  if (imageError) {
+    return (
+      <div className="w-full h-40 bg-muted rounded flex items-center justify-center">
+        <Book className="w-8 h-8 text-muted-foreground" />
+      </div>
+    );
+  }
+
+  return (
+    <img 
+      src={`https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`}
+      alt={`${title} cover`}
+      className="w-full h-40 object-cover rounded"
+      onError={() => setImageError(true)}
+    />
+  );
+};
 
 // Sample data - replace with your actual data
 const moviesWatched = [
@@ -35,20 +108,19 @@ const internshipPhotos = [
 
 // Add your life adventures photos here
 const lifeAdventurePhotos = [
-  { src: "/IMG_4905.jpg", alt: "Travel adventure", location: "Ooink Ramen", description: "Best bowl ramen I've had to this day, mala sensation goes crazy" },
-  { src: "/IMG_5118.jpg", alt: "Hobby photo", location: "T-Mobile Park", description: "Pretty baseball park" },
-  { src: "/IMG_5133.jpg", alt: "Achievement photo", location: "T-Mobile Park", description: "Watching the Mariners" },
-  { src: "/IMG_5326.jpg", alt: "Friends gathering", location: "Penberthy Fields", description: "Some days the view made the hours worthwhile" },
-  { src: "/IMG_5359.jpg", alt: "Personal milestone", location: "Zach. Engineering Building 1", description: "Look Mom I'm a Photographer Pt. 1" },
-  { src: "/IMG_5360.jpg", alt: "Personal milestone", location: "Zach. Engineering Building 2", description: "Look Mom I'm a Photographer Pt. 2" },
-  { src: "/IMG_5401.jpg", alt: "Personal milestone", location: "Penberthy Fields", description: "Day in the life of Sid the referee" },
-  { src: "/IMG_5409.jpg", alt: "Personal milestone", location: "Panoramic Seattle Seascape", description: "Panorama of sea from Pike Place overview" },
-  { src: "/IMG_5433.jpg", alt: "Personal milestone", location: "Seattle Skyline", description: "Looking back at Seattle on way to Bainbridge Island" },
-  { src: "/IMG_5444.jpg", alt: "Personal milestone", location: "Ramen Danbo", description: "3rd Best ramen I've had" },
-  { src: "/IMG_5453.jpg", alt: "Personal milestone", location: "Pike Place", description: "Nice ambience at Pike Place after eating @ Pink Door" },
-  { src: "/IMG_5498.jpg", alt: "Personal milestone", location: "Dino's Tomato Pie", description: "Best Pizza I've had, sicilian style pies are the way to go" },
+  { src: "/IMG_4905.jpg", alt: "Best bowl ramen I've had to this day, mala sensation goes crazy", location: "Ooink Ramen", description: "Best bowl ramen I've had to this day, mala sensation goes crazy" },
+  { src: "/IMG_5118.jpg", alt: "Pretty baseball park", location: "T-Mobile Park", description: "Pretty baseball park" },
+  { src: "/IMG_5133.jpg", alt: "Watching the Mariners", location: "T-Mobile Park", description: "Watching the Mariners" },
+  { src: "/IMG_5326.jpg", alt: "Some days the view made the hours worthwhile", location: "Penberthy Fields", description: "Some days the view made the hours worthwhile" },
+  { src: "/IMG_5359.jpg", alt: "Look Mom I'm a Photographer Pt. 1", location: "Zach. Engineering Building 1", description: "Look Mom I'm a Photographer Pt. 1" },
+  { src: "/IMG_5360.jpg", alt: "Look Mom I'm a Photographer Pt. 2", location: "Zach. Engineering Building 2", description: "Look Mom I'm a Photographer Pt. 2" },
+  { src: "/IMG_5401.jpg", alt: "Day in the life of Sid the referee", location: "Penberthy Fields", description: "Day in the life of Sid the referee" },
+  { src: "/IMG_5409.jpg", alt: "Panorama of sea from Pike Place overview", location: "Panoramic Seattle Seascape", description: "Panorama of sea from Pike Place overview" },
+  { src: "/IMG_5433.jpg", alt: "Looking back at Seattle on way to Bainbridge Island", location: "Seattle Skyline", description: "Looking back at Seattle on way to Bainbridge Island" },
+  { src: "/IMG_5444.jpg", alt: "3rd Best ramen I've had", location: "Ramen Danbo", description: "3rd Best ramen I've had" },
+  { src: "/IMG_5453.jpg", alt: "Nice ambience at Pike Place after eating @ Pink Door", location: "Pike Place", description: "Nice ambience at Pike Place after eating @ Pink Door" },
+  { src: "/IMG_5498.jpg", alt: "Best Pizza I've had, sicilian style pies are the way to go", location: "Dino's Tomato Pie", description: "Best Pizza I've had, sicilian style pies are the way to go" },
 ];
-
 
 const StarRating = ({ rating }: { rating: number }) => {
   return (
@@ -242,24 +314,27 @@ export default function Personal() {
         </p>
       </div>
 
-      {/* Movies Section */}
+      {/* Movies Section with Posters */}
       <section className="space-y-6">
         <div className="flex items-center gap-3">
           <Film className="w-6 h-6 text-primary" />
           <h2 className="text-2xl font-heading font-semibold">Movies I've Watched This Year</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {moviesWatched.map((movie, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
+            <Card key={index} className="hover:shadow-lg transition-shadow overflow-hidden">
+              <CardContent className="p-0">
+                <MoviePoster tmdbId={movie.id} title={movie.title} />
+              </CardContent>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg">{movie.title}</CardTitle>
+                <CardTitle className="text-base">{movie.title}</CardTitle>
                 <div className="flex items-center justify-between">
-                  <Badge variant="secondary">{movie.genre}</Badge>
-                  <span className="text-sm text-muted-foreground">{movie.year}</span>
+                  <Badge variant="secondary" className="text-xs">{movie.genre}</Badge>
+                  <span className="text-xs text-muted-foreground">{movie.year}</span>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <StarRating rating={movie.rating} />
               </CardContent>
             </Card>
@@ -267,7 +342,7 @@ export default function Personal() {
         </div>
       </section>
 
-      {/* Books Section */}
+      {/* Books Section with Covers */}
       <section className="space-y-6">
         <div className="flex items-center gap-3">
           <Book className="w-6 h-6 text-primary" />
@@ -276,17 +351,22 @@ export default function Personal() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {booksRead.map((book, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg">{book.title}</CardTitle>
-                <p className="text-muted-foreground">by {book.author}</p>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline">{book.category}</Badge>
-                  <StarRating rating={book.rating} />
+            <Card key={index} className="hover:shadow-lg transition-shadow overflow-hidden">
+              <div className="flex gap-4 p-4">
+                <div className="w-28 flex-shrink-0">
+                  <BookCover isbn={book.isbn} title={book.title} />
                 </div>
-              </CardContent>
+                <div className="flex-1 space-y-2">
+                  <div>
+                    <h3 className="font-semibold text-base">{book.title}</h3>
+                    <p className="text-sm text-muted-foreground">by {book.author}</p>
+                  </div>
+                  <div className="flex items-center justify-between pt-2">
+                    <Badge variant="outline" className="text-xs">{book.category}</Badge>
+                    <StarRating rating={book.rating} />
+                  </div>
+                </div>
+              </div>
             </Card>
           ))}
         </div>

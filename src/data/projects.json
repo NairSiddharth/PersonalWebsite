@@ -17,10 +17,10 @@
   },
   {
     "id": 3,
-    "name": "blog",
-    "description": "Static blog built with Next.js, styled-components, and MDX.",
-    "html_url": "https://github.com/<your-username>/blog",
-    "status": "Archived",
-    "tags": ["JavaScript", "Next.js", "MDX"]
+    "name": "Scentinel",
+    "description": "Based off of recent cologne wear, season, and notes in cologne -> suggest a variety of colognes from current collection to potentially wear",
+    "html_url": "https://github.com/NairSiddharth/Scentinel",
+    "status": "In Progress",
+    "tags": ["Python", "Pytorch", "Machine Learning"]
   }
 ]

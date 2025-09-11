@@ -39,10 +39,10 @@ function GreetingScreen({ onComplete, onSkip }: GreetingScreenProps) {
         // Create TypeIt instance
         instanceRef.current = new window.TypeIt(typeItRef.current, {
           strings: [
-            "Welcome! 👋",
+            "Hi! 👋",
             "I'm Siddharth Nair",
-            "Thanks for visiting my portfolio",
-            "Let's explore together..."
+            "Thanks for visiting my personal website",
+            "Take a look around!"
           ],
           speed: 75,
           deleteSpeed: 50,
@@ -150,13 +150,13 @@ export default function About() {
       {/* Your existing About content */}
       <section className={`flex flex-col items-center justify-center py-12 px-6 max-w-4xl mx-auto space-y-6 text-center transition-opacity duration-800 ${showGreeting ? 'opacity-0' : 'opacity-100'}`}>
         {/* Profile Picture */}
-        <Avatar className="w-36 h-36 sm:w-24 sm:h-24 shadow-sm">
+        <Avatar className="w-48 h-48 shadow-sm">
           <AvatarImage src="/moi.jpg" alt={profile.name} />
           <AvatarFallback>{profile.name[0]}</AvatarFallback>
         </Avatar>
         
         {/* Header */}
-        <h1 className="text-4xl font-bold">Who Am I?</h1>
+        <h1 className="text-3xl font-bold">Who Am I?</h1>
         
         {/* Status Badge */}
         <Badge variant="secondary" className="mb-2">

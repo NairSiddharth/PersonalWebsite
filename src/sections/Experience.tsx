@@ -22,6 +22,7 @@ interface Experience {
   company: string;
   role: string;
   location: string;
+  type: string;
   startDate: string;
   endDate: string;
   summary: string;

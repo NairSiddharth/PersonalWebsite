@@ -4,6 +4,7 @@
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Plano, TX",
+      "type": "Internship",
       "startDate": "2025-06-01",
       "endDate": "2025-08-31",
       "summary": "Delivered multiple large-scale initiatives impacting 1,000+ engineers and 85M+ customers through scalable infrastructure and AI-powered tools.",
@@ -15,13 +16,14 @@
       ],
       "skills": [
         "Python", "TypeScript", "REST APIs", "Data Visualization",
-        "Terraform", "Redis", "Vector Databases", "MCP", "Prompt Engineering", "RAG"
+        "Terraform", "Redis", "Vector Databases", "MCP", "Prompt Engineering", "RAG", "Generative AI", "LangChain", "OpenAI", "AWS", "Pydantic"
       ]
     },
     {
       "company": "Texas A&M University",
       "role": "Intramural Sports Official/Supervisor",
       "location": "College Station, TX",
+      "type": "Part-time",
       "startDate": "2023-01-01",
       "endDate": "2024-12-31",
       "summary": "Contributed to managing intramural flag football operations for 14,000+ participants per semester, managing referee teams, and supervising tournaments while officiating games.",
@@ -37,6 +39,7 @@
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
+      "type": "Internship",
       "startDate": "2024-06-01",
       "endDate": "2024-08-31",
       "summary": "Accelerated backend operations with automation and forecasting, reducing team bug resolution time by 50%.",
@@ -45,14 +48,14 @@
         "Engineered a time-series forecasting model with 5.38% SMAPE, leveraging historical data and macroeconomic indicators to improve accuracy."
       ],
       "skills": [
-        "React", "TypeScript", "Python", "REST APIs", "Data Visualization", "TailwindCSS",
-        "Time Series Forecasting", "Machine Learning"
+        "React", "TypeScript", "Python", "REST APIs", "Data Visualization", "CSS", "Time Series Forecasting", "Machine Learning", "Java", "Spring Boot", "Microservices", "Node.js", "SQL"
       ]
     },
     {
       "company": "AI4All",
       "role": "Student Teacher",
       "location": "College Station, TX",
+      "type": "Part-time",
       "startDate": "2023-01-01",
       "endDate": "2024-01-31",
       "summary": "Enabled students to develop real-world AI projects and present measurable impact through coaching and mentorship.",
@@ -61,13 +64,14 @@
         "Facilitated Apply AI program events and guided 4 student groups per term through project milestones, collaborating with industry partners to ensure alignment with real-world applications."
       ],
       "skills": [
-        "Python", "Machine Learning", "Teaching", "Project Management", "Mentorship"
+        "Python", "Machine Learning", "Teaching", "Project Management", "Mentorship", "scikit-learn", "Pandas"
       ]
     },
     {
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
+      "type": "Internship",
       "startDate": "2023-06-01",
       "endDate": "2023-08-31",
       "summary": "Enhanced analytics and compliance monitoring through full-stack dashboard development, improving team decision-making.",
@@ -76,13 +80,14 @@
         "Introduced dynamic filtering and historical drill down capabilities to enhance pattern detection and compliance analysis."
       ],
       "skills": [
-        "React", "TypeScript", "Python", "REST APIs", "Data Visualization", "TailwindCSS"
+        "React", "TypeScript", "Python", "REST APIs", "Data Visualization", "CSS", "Pandas", "FastAPI"
       ]
     },
     {
       "company": "JPMorganChase",
       "role": "Software Engineering Intern",
       "location": "Houston, TX",
+      "type": "Internship",
       "startDate": "2022-06-01",
       "endDate": "2022-08-31",
       "summary": "Improved ML model monitoring and control through internal tools, enabling faster deployment and operational efficiency.",
@@ -91,13 +96,14 @@
         "Developed an interactive dashboard enabling both real-time monitoring and direct control of ML training jobs and deployment status, with live logging and visual analytics."
       ],
       "skills": [
-        "Python", "FastAPI", "React", "TypeScript", "REST APIs", "Data Visualization", "TailwindCSS"
+        "Python", "FastAPI", "Data Visualization", "AWS Sagemaker", "Machine Learning", "AWS CloudWatch"
       ]
     },
     {
       "company": "Lumen Technologies",
       "role": "Software Engineering Intern",
-      "location": "Houston, TX",
+      "location": "Remote",
+      "type": "Internship",
       "startDate": "2021-06-01",
       "endDate": "2021-08-31",
       "summary": "Streamlined database operations and reporting by automating data pipelines and ensuring system stability.",
@@ -106,7 +112,7 @@
         "Implemented monthly database resets with shell scripts to prevent data over-accumulation and maintain system performance."
       ],
       "skills": [
-        "Python", "Shell Scripting", "SQL", "Data Pipelines"
+        "Python", "Shell Scripting", "SQL", "Unix/Linux"
       ]
     }
   ],
