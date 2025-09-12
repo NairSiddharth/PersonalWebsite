@@ -77,60 +77,86 @@ const BookCover = ({ isbn, title }: { isbn: number, title: string }) => {
   );
 };
 
-// Component to display Spotify tracks
+// Updated SpotifyTopTracks component for Offscreen.tsx
+// Replace the existing SpotifyTopTracks component in your Offscreen.tsx file
+
 const SpotifyTopTracks = () => {
   const [tracks, setTracks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTopTracks = async () => {
-      // Using mock data - replace with your actual top tracks
-      // To use real Spotify API, you need OAuth authentication
-      const mockTracks = [
-        {
-          name: "Flowers",
-          artists: [{ name: "Miley Cyrus" }],
-          album: {
-            name: "Endless Summer Vacation",
-            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02b9b5e18e5a6e0e62e0a8b3c0" }]
-          }
-        },
-        {
-          name: "Kill Bill",
-          artists: [{ name: "SZA" }],
-          album: {
-            name: "SOS",
-            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02e3c0a7e8e6b92c3e5dc5db17" }]
-          }
-        },
-        {
-          name: "Unholy",
-          artists: [{ name: "Sam Smith" }, { name: "Kim Petras" }],
-          album: {
-            name: "Gloria",
-            images: [{ url: "https://i.scdn.co/image/ab67616d00001e027d9fe17c3d8e9b5e1e0d5f7e" }]
-          }
-        },
-        {
-          name: "As It Was",
-          artists: [{ name: "Harry Styles" }],
-          album: {
-            name: "Harry's House",
-            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02b46f74097655d7f353caab14" }]
-          }
-        },
-        {
-          name: "Anti-Hero",
-          artists: [{ name: "Taylor Swift" }],
-          album: {
-            name: "Midnights",
-            images: [{ url: "https://i.scdn.co/image/ab67616d00001e02e0b60c608586d88252b8fbc0" }]
-          }
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const response = await fetch('/api/spotify-top-tracks');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      ];
-      
-      setTracks(mockTracks);
-      setLoading(false);
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        
+        // Extract tracks from Spotify API response
+        setTracks(data.items || []);
+        
+      } catch (error) {
+        console.error('Error fetching Spotify tracks:', error);
+        setError(error instanceof Error ? error.message : 'Failed to load tracks');
+        
+        // Fallback to mock data if API fails
+        const mockTracks = [
+          {
+            name: "Flowers",
+            artists: [{ name: "Miley Cyrus" }],
+            album: {
+              name: "Endless Summer Vacation",
+              images: [{ url: "https://i.scdn.co/image/ab67616d00001e02b9b5e18e5a6e0e62e0a8b3c0" }]
+            }
+          },
+          {
+            name: "Kill Bill",
+            artists: [{ name: "SZA" }],
+            album: {
+              name: "SOS",
+              images: [{ url: "https://i.scdn.co/image/ab67616d00001e02e3c0a7e8e6b92c3e5dc5db17" }]
+            }
+          },
+          {
+            name: "Unholy",
+            artists: [{ name: "Sam Smith" }, { name: "Kim Petras" }],
+            album: {
+              name: "Gloria",
+              images: [{ url: "https://i.scdn.co/image/ab67616d00001e027d9fe17c3d8e9b5e1e0d5f7e" }]
+            }
+          },
+          {
+            name: "As It Was",
+            artists: [{ name: "Harry Styles" }],
+            album: {
+              name: "Harry's House",
+              images: [{ url: "https://i.scdn.co/image/ab67616d00001e02b46f74097655d7f353caab14" }]
+            }
+          },
+          {
+            name: "Anti-Hero",
+            artists: [{ name: "Taylor Swift" }],
+            album: {
+              name: "Midnights",
+              images: [{ url: "https://i.scdn.co/image/ab67616d00001e02e0b60c608586d88252b8fbc0" }]
+            }
+          }
+        ];
+        setTracks(mockTracks);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchTopTracks();
@@ -150,39 +176,56 @@ const SpotifyTopTracks = () => {
     );
   }
 
+  if (error && tracks.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <Music className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+        <p className="text-muted-foreground">Unable to load Spotify tracks</p>
+        <p className="text-sm text-muted-foreground mt-1">{error}</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {tracks.map((track, index) => (
-        <Card key={index} className="overflow-hidden hover:shadow-lg transition-all group">
-          <div className="relative aspect-square">
-            <img 
-              src={track.album.images[0]?.url || "/placeholder-album.jpg"}
-              alt={`${track.album.name} cover`}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-              <div className="absolute bottom-2 left-2 right-2">
-                <Music className="w-4 h-4 text-white/80" />
+    <div className="space-y-2">
+      {error && (
+        <div className="text-sm text-yellow-600 bg-yellow-50 p-2 rounded border border-yellow-200">
+          ⚠️ Using fallback data: {error}
+        </div>
+      )}
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {tracks.map((track, index) => (
+          <Card key={track.id || index} className="overflow-hidden hover:shadow-lg transition-all group">
+            <div className="relative aspect-square">
+              <img 
+                src={track.album.images[0]?.url || "/placeholder-album.jpg"}
+                alt={`${track.album.name} cover`}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2 left-2 right-2">
+                  <Music className="w-4 h-4 text-white/80" />
+                </div>
               </div>
             </div>
-          </div>
-          <CardContent className="p-3 space-y-1">
-            <h4 className="font-semibold text-sm line-clamp-1" title={track.name}>
-              {track.name}
-            </h4>
-            <p className="text-xs text-muted-foreground line-clamp-1" title={track.artists.map((a: any) => a.name).join(', ')}>
-              {track.artists.map((a: any) => a.name).join(', ')}
-            </p>
-            <p className="text-xs text-muted-foreground/70 line-clamp-1" title={track.album.name}>
-              {track.album.name}
-            </p>
-          </CardContent>
-        </Card>
-      ))}
+            <CardContent className="p-3 space-y-1">
+              <h4 className="font-semibold text-sm line-clamp-1" title={track.name}>
+                {track.name}
+              </h4>
+              <p className="text-xs text-muted-foreground line-clamp-1" title={track.artists.map((a: any) => a.name).join(', ')}>
+                {track.artists.map((a: any) => a.name).join(', ')}
+              </p>
+              <p className="text-xs text-muted-foreground/70 line-clamp-1" title={track.album.name}>
+                {track.album.name}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };
-
 // Data
 const moviesWatched = [
   { title: "The Naked Gun", year: 2025, rating: 4, genre: "Comedy", id: 1035259 },

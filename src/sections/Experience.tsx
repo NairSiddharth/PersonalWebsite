@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
@@ -128,6 +130,9 @@ export default function Experience() {
     return "lg:w-6/12"; // Large (long-term positions)
   };
 
+  // MOVE ALL HOOKS BEFORE ANY CONDITIONAL RETURNS
+  
+  // First useEffect: Process experiences data
   useEffect(() => {
     // Sort experiences by start date (most recent first)
     const sortedExperiences = [...resumeData.experience].sort((a, b) => {
@@ -194,6 +199,17 @@ export default function Experience() {
     setMounted(true);
   }, []);
 
+  // Second useEffect: Initialize AOS animations
+  useEffect(() => {
+    AOS.init({
+      duration: 800,          // controls speed
+      easing: "ease-out-cubic",
+      once: true,             // animate only the first time scrolling into view
+      anchorPlacement: "center-bottom", // default for fade-up
+    });
+  }, []); // Run once on mount
+
+  // NOW we can have conditional returns after all hooks
   if (!mounted) return null;
 
   return (
@@ -277,18 +293,29 @@ export default function Experience() {
                       </Badge>
                     </div>
 
-                    {/* Card Container with dynamic sizing */}
-                    <div className={`w-full ${exp.sizeClass || 'lg:w-5/12'} ${
-                      isLeft ? 'lg:mr-auto lg:pr-8' : 'lg:ml-auto lg:pl-8'
-                    }`}>
-                      <Card className={`shadow-lg hover:shadow-xl transition-all duration-300 ${
-                        isLeft ? 'lg:text-right' : 'lg:text-left'
-                      } ${exp.hasOverlap ? 'ring-2 ring-orange-400 ring-opacity-40' : ''}`}>
+                    {/* Card Container with dynamic sizing and AOS animation */}
+                    <div
+                      className={`w-full ${exp.sizeClass || 'lg:w-5/12'} ${
+                        isLeft ? 'lg:mr-auto lg:pr-8' : 'lg:ml-auto lg:pl-8'
+                      }`}
+                      data-aos="fade-up"
+                      data-aos-delay={index * 100} // Stagger animations
+                      data-aos-anchor-placement="center-bottom"
+                    >
+                      <Card
+                        className={`shadow-lg hover:shadow-xl transition-all duration-300 ${
+                          isLeft ? 'lg:text-right' : 'lg:text-left'
+                        } ${exp.hasOverlap ? 'ring-2 ring-orange-400 ring-opacity-40' : ''}`}
+                      >
                         <CardHeader>
                           <CardTitle className="text-lg font-bold">{exp.role}</CardTitle>
                           <CardDescription className="text-base font-medium">
                             {exp.company} — {exp.location}
-                            {exp.hasOverlap && <span className="ml-2 text-orange-600 text-sm font-semibold">● Concurrent Role</span>}
+                            {exp.hasOverlap && (
+                              <span className="ml-2 text-orange-600 text-sm font-semibold">
+                                ● Concurrent Role
+                              </span>
+                            )}
                           </CardDescription>
                           {/* Mobile date and duration display */}
                           <div className="lg:hidden flex flex-wrap gap-2">
@@ -302,11 +329,20 @@ export default function Experience() {
                         </CardHeader>
 
                         <CardContent>
-                          <p className="text-muted-foreground mb-4 leading-relaxed">{exp.summary}</p>
+                          <p className="text-muted-foreground mb-4 leading-relaxed">
+                            {exp.summary}
+                          </p>
                           
-                          <ul className={`space-y-2 mb-6 text-sm ${isLeft ? 'lg:text-right' : 'lg:text-left'}`}>
+                          <ul
+                            className={`space-y-2 mb-6 text-sm ${
+                              isLeft ? 'lg:text-right' : 'lg:text-left'
+                            }`}
+                          >
                             {exp.description.map((item, idx) => (
-                              <li key={idx} className={`flex items-start ${isLeft ? 'lg:flex-row-reverse' : ''}`}>
+                              <li
+                                key={idx}
+                                className={`flex items-start ${isLeft ? 'lg:flex-row-reverse' : ''}`}
+                              >
                                 <span className="w-2 h-2 bg-primary rounded-full mt-2 mx-3 flex-shrink-0"></span>
                                 <span>{item}</span>
                               </li>

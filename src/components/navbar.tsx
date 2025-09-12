@@ -37,12 +37,16 @@ const navLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [currentGradient, setCurrentGradient] = useState(gradients[0]);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
-  // Change gradient when pathname changes
+  // Fix hydration mismatch by using pathname-based gradient selection
   useEffect(() => {
-    const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
-    setCurrentGradient(randomGradient);
+    setMounted(true);
+    // Use pathname as seed for consistent gradient selection (same as footer)
+    const pathHash = pathname.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const gradientIndex = pathHash % gradients.length;
+    setCurrentGradient(gradients[gradientIndex]);
   }, [pathname]);
 
   // Function to check if link is active
@@ -144,15 +148,16 @@ export default function Navbar() {
         )}
       </nav>
       
-      {/* Animated Gradient Border */}
-      <div 
-        className="fixed top-[72px] w-full h-[1px] z-50 transition-all duration-1000 ease-in-out shadow-lg"
-        style={{ 
-          backgroundImage: currentGradient,
-          opacity: .8,
-          filter: 'brightness(.5)',
-        }}
-      />
+      {/* Fixed Animated Gradient Border */}
+      {mounted && (
+        <div 
+          className="fixed top-[72px] w-full h-[1px] z-50 transition-all duration-1000 ease-in-out shadow-lg"
+          style={{ 
+            backgroundImage: currentGradient,
+            opacity: 0.8,
+          }}
+        />
+      )}
     </>
   );
 }

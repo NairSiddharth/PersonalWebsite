@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { X, MapPin, Briefcase, GraduationCap, Code } from "lucide-react";
+import { X, MessageCircle } from "lucide-react";
 
 // TypeIt interface for TypeScript
 interface TypeItInstance {
@@ -30,18 +30,59 @@ function GreetingScreen({ onComplete, onSkip }: GreetingScreenProps) {
   const instanceRef = useRef<TypeItInstance | null>(null);
 
   useEffect(() => {
+    // Check if TypeIt is already loaded
+    if (window.TypeIt) {
+      initializeTypeIt();
+      return;
+    }
+
+    // Only load script if TypeIt isn't available
+    const existingScript = document.querySelector('script[src*="typeit"]');
+    if (existingScript) {
+      // Script exists but TypeIt isn't ready yet, wait for it
+      const checkTypeIt = setInterval(() => {
+        if (window.TypeIt) {
+          clearInterval(checkTypeIt);
+          initializeTypeIt();
+        }
+      }, 100);
+      return () => clearInterval(checkTypeIt);
+    }
+
     // Load TypeIt from CDN
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/typeit/8.7.1/index.umd.js';
     script.async = true;
     
     script.onload = () => {
-      if (typeItRef.current && window.TypeIt) {
+      initializeTypeIt();
+    };
+
+    script.onerror = () => {
+      console.error('Failed to load TypeIt script');
+    };
+
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      if (instanceRef.current) {
+        instanceRef.current.destroy();
+        instanceRef.current = null;
+      }
+      // Don't remove script as it might be used by other components
+    };
+
+    function initializeTypeIt() {
+      if (typeItRef.current && window.TypeIt && !instanceRef.current) {
+        // Clear any existing content in the element
+        typeItRef.current.innerHTML = '';
+        
         // Create TypeIt instance
         instanceRef.current = new window.TypeIt(typeItRef.current, {
           strings: [
             "Hi! 👋",
-            "I'm Siddharth Nair",
+            "I'm Siddharth Nair", 
             "Thanks for visiting my personal website",
             "Take a look around!"
           ],
@@ -59,19 +100,7 @@ function GreetingScreen({ onComplete, onSkip }: GreetingScreenProps) {
           }
         }).go();
       }
-    };
-
-    document.head.appendChild(script);
-
-    // Cleanup
-    return () => {
-      if (instanceRef.current) {
-        instanceRef.current.destroy();
-      }
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
+    }
   }, [onComplete]);
 
   return (
@@ -103,39 +132,15 @@ function GreetingScreen({ onComplete, onSkip }: GreetingScreenProps) {
   );
 }
 
-export default function About() {
+interface AboutProps {
+  onConnectClick: () => void;
+}
+
+export default function About({ onConnectClick }: AboutProps) {
   const [showGreeting, setShowGreeting] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  // Latest experience for employment text
-  const latestExperience = resumeData.experience[0];
-  const currentEmployer = latestExperience?.company || "";
-  const currentRole = latestExperience?.role || "";
-  
-  // Calculate years of experience
-  const firstExperience = resumeData.experience[resumeData.experience.length - 1];
-  const yearsOfExperience = new Date().getFullYear() - new Date(firstExperience?.startDate || "2021-06-01").getFullYear();
-  
-  // Get top skills (first 8 from different categories)
-  const topSkills = [
-    "Python", "TypeScript", "React", "AWS", 
-    "Machine Learning", "FastAPI", "Docker", "PostgreSQL"
-  ];
-
-  // Quick stats for compact display
-  const quickStats = [
-    { icon: MapPin, value: "Houston, TX" },
-    { icon: Briefcase, value: `${yearsOfExperience}+ years exp` },
-    { icon: GraduationCap, value: "Texas A&M" },
-    { icon: Code, value: "Full-Stack" }
-  ];
-
-  const employmentText =
-    profile.status.toLowerCase().includes("happily employed")
-      ? `${currentRole} at ${currentEmployer}`
-      : profile.status.toLowerCase().includes("looking")
-      ? `Previously ${currentRole} at ${currentEmployer}`
-      : "";
+  // Latest experience for employment text - removed as discussed
 
   useEffect(() => {
     const hasSeenGreeting = sessionStorage.getItem('hasSeenGreeting');
@@ -168,86 +173,74 @@ export default function About() {
         </div>
       )}
       
-      {/* Compact About section optimized for side-by-side layout */}
-      <section className={`py-8 transition-opacity duration-800 ${showGreeting ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="space-y-6">
+      {/* About section with connect button */}
+      <section className={`py-12 transition-opacity duration-800 ${showGreeting ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="space-y-6 max-w-4xl mx-auto">
           {/* Header */}
-          <div>
-            <h2 className="text-3xl font-bold mb-4 text-left">About Me</h2>
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-2">About Me</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Building innovative solutions with modern technology and a passion for continuous learning.
+            </p>
+          </div>
+
+          {/* Avatar and Name Section */}
+          <div className="flex flex-col items-center space-y-4">
+            <Avatar className="w-48 h-48 lg:w-56 lg:h-56 shadow-xl ring-4 ring-background">
+              <AvatarImage src="/moi.jpg" alt={profile.name} />
+              <AvatarFallback className="text-3xl">{profile.name[0]}</AvatarFallback>
+            </Avatar>
             
-            {/* Avatar and Name Section */}
-            <div className="flex flex-col items-center space-y-4 mb-6">
-              <Avatar className="w-48 h-48 lg:w-56 lg:h-56 shadow-xl ring-4 ring-background">
-                <AvatarImage src="/moi.jpg" alt={profile.name} />
-                <AvatarFallback className="text-3xl">{profile.name[0]}</AvatarFallback>
-              </Avatar>
-              
-              <div className="text-center space-y-2">
-                <h1 className="text-2xl font-bold">{profile.name}</h1>
-                <p className="text-sm text-muted-foreground">{employmentText}</p>
-                <Badge variant="secondary" className="mt-2">
-                  🌟 {profile.status}
-                </Badge>
-              </div>
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold">{profile.name}</h1>
+              {/* Removed employment text as discussed */}
+              <Badge variant="secondary" className="mt-2">
+                🌟 {profile.status}
+              </Badge>
             </div>
           </div>
 
           {/* Bio */}
           <Card className="border-muted">
-            <CardContent className="p-4">
-              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+            <CardContent className="p-6">
+              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line text-center">
                 {profile.summary}
               </p>
             </CardContent>
           </Card>
 
-          {/* Quick Stats Grid - 2x2
-          <div className="grid grid-cols-2 gap-2">
-            {quickStats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-muted/50">
-                  <Icon className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="text-xs font-medium truncate">{stat.value}</span>
-                </div>
-              );
-            })}
-          </div> */}
-
-          {/* Skills
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Core Technologies</h3>
-            <div className="flex flex-wrap gap-1.5">
-              {topSkills.slice(0, 6).map((skill) => (
-                <Badge key={skill} variant="outline" className="text-xs px-2 py-0.5">
-                  {skill}
-                </Badge>
-              ))}
-              <Badge variant="secondary" className="text-xs px-2 py-0.5">
-                +20 more
-              </Badge>
-            </div>
-          </div> */}
-
-          {/* Currently Learning - Compact Card */}
+          {/* Currently Learning */}
           <Card className="bg-muted/30 border-muted">
-            <CardContent className="p-3">
-              <div className="flex items-start gap-2">
-                <span className="relative flex h-2 w-2 mt-1">
+            <CardContent className="p-4">
+              <div className="flex items-start gap-3">
+                <span className="relative flex h-3 w-3 mt-1">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold mb-1">Currently Exploring</p>
-                  <p className="text-xs text-muted-foreground line-clamp-2">
-                    Sveltekit for Full-Stack Development, Algorithm Development, & a new recipe book (Unofficial Studio Ghibli Cookbook FTW)!
+                  <p className="font-medium mb-2">Currently Exploring</p>
+                  <p className="text-sm text-muted-foreground">
+                    Sveltekit for full-stack development, Algorithm development for recommendations based off user history, A new recipe book (Unofficial Studio Ghibli Cookbook FTW)!
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-        
+          {/* Let's Connect Button - Prominent CTA */}
+          <div className="text-center pt-4">
+            <Button 
+              onClick={onConnectClick}
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Let's Connect
+            </Button>
+            <p className="text-sm text-muted-foreground mt-2">
+              Ready to collaborate? Let's discuss opportunities!
+            </p>
+          </div>
         </div>
       </section>
     </>

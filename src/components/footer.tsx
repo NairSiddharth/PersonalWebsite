@@ -27,23 +27,16 @@ const gradients = [
 export default function Footer() {
   const pathname = usePathname();
   const [currentGradient, setCurrentGradient] = useState(gradients[0]);
-  const [gradientPosition, setGradientPosition] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   // Change gradient when pathname changes (synced with navbar)
   useEffect(() => {
+    setMounted(true);
     // Use pathname as seed for consistent gradient between navbar and footer
     const pathHash = pathname.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const gradientIndex = pathHash % gradients.length;
     setCurrentGradient(gradients[gradientIndex]);
   }, [pathname]);
-
-  // Animate gradient position
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGradientPosition((prev) => (prev + 1) % 200);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
 
   // Only sections with fragment are "on-page" sections
   const sections = [
@@ -57,18 +50,16 @@ export default function Footer() {
 
   return (
     <>
-      {/* Animated Gradient Border - Top of Footer */}
-      <div 
-        className="w-full h-[1px] transition-all duration-1000 ease-in-out relative overflow-hidden"
-        style={{ 
-          background: currentGradient,
-          backgroundSize: '100% 100%',
-          backgroundPosition: `${gradientPosition}%`,
-          opacity: 0.8,
-          filter: 'brightness(.5)',
-        }}
-      >
-      </div>
+      {/* Fixed Animated Gradient Border - Top of Footer */}
+      {mounted && (
+        <div 
+          className="w-full h-[1px] transition-all duration-1000 ease-in-out relative overflow-hidden"
+          style={{ 
+            backgroundImage: currentGradient,
+            opacity: 0.8,
+          }}
+        />
+      )}
 
       <footer className="pt-8 pb-6 mt-auto w-full bg-background">
         <div className="max-w-4xl mx-auto px-6 relative">
@@ -90,11 +81,13 @@ export default function Footer() {
                       className="hover:text-foreground transition-colors text-sm font-medium relative group"
                     >
                       {sec.title}
-                      {/* Hover gradient underline */}
-                      <span 
-                        className="absolute -bottom-1 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300"
-                        style={{ background: currentGradient }}
-                      />
+                      {/* Fixed Hover gradient underline */}
+                      {mounted && (
+                        <span 
+                          className="absolute -bottom-1 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300"
+                          style={{ backgroundImage: currentGradient }}
+                        />
+                      )}
                     </a>
                   );
                 }
@@ -107,11 +100,13 @@ export default function Footer() {
                     className="hover:text-foreground transition-colors text-sm font-medium relative group"
                   >
                     {sec.title}
-                    {/* Hover gradient underline */}
-                    <span 
-                      className="absolute -bottom-1 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300"
-                      style={{ background: currentGradient }}
-                    />
+                    {/* Fixed Hover gradient underline */}
+                    {mounted && (
+                      <span 
+                        className="absolute -bottom-1 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300"
+                        style={{ backgroundImage: currentGradient }}
+                      />
+                    )}
                   </a>
                 );
               })}
@@ -119,11 +114,11 @@ export default function Footer() {
 
             {/* Copyright */}
             <div className="text-muted-foreground text-sm text-center">
-              © {new Date().getFullYear()} Siddharth Nair. All rights reserved.
+              © {new Date().getFullYear()} Siddharth Nair. All rights, preferably the cool ones, reserved.
             </div>
           </div>
 
-          {/* Right-side buttons with gradient hover effect */}
+          {/* Right-side buttons with fixed gradient hover effect */}
           <div className="flex flex-col items-center gap-2 mt-4 lg:absolute lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:mt-0">
             <Button 
               asChild 
@@ -132,10 +127,12 @@ export default function Footer() {
               className="relative overflow-hidden group"
             >
               <a href={`mailto:${profile.email}`} className="flex items-center gap-2">
-                <span 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                  style={{ backgroundImage: currentGradient }}
-                />
+                {mounted && (
+                  <span 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                    style={{ backgroundImage: currentGradient }}
+                  />
+                )}
                 <Mail className="w-4 h-4 relative z-10" /> 
                 <span className="relative z-10">Email Me</span>
               </a>
@@ -152,10 +149,12 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                <span 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                  style={{ background: currentGradient }}
-                />
+                {mounted && (
+                  <span 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                    style={{ backgroundImage: currentGradient }}
+                  />
+                )}
                 <Linkedin className="w-4 h-4 relative z-10" /> 
                 <span className="relative z-10">LinkedIn</span>
               </a>
