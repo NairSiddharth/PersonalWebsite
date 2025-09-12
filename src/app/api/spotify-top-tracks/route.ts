@@ -1,6 +1,8 @@
 // Production version: src/app/api/spotify-top-tracks/route.ts
 import { NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 let accessToken: string | null = null;
 let accessTokenExpires = 0;
 
