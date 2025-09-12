@@ -38,6 +38,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
     "@types/aos": "^3.0.7",
     "@types/node": "24.3.1",
     "@types/pdfjs-dist": "^2.10.377",
@@ -48,7 +49,8 @@
     "eslint-config-next": "^13.5.6",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "wrangler": "^4.36.0"
   },
   "description": "",
   "main": "next.config.js",
