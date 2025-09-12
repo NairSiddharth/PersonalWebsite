@@ -3,24 +3,39 @@
     "id": 1,
     "name": "Personal Website",
     "description": "My personal portfolio website built with React, Tailwind, and Cloudflare Pages to keep in touch with frontend skills & have something to show for it.",
+    "detailed_description": "This website is built using Next.js and TypeScript, styled with Tailwind CSS, and deployed on Cloudflare Pages. It features a responsive design, dark mode support, and interactive elements to showcase my projects and skills effectively.",
     "html_url": "https://github.com/NairSiddharth/PersonalWebsite",
-    "status": "In Progress",
+    "live_url": "http://127:0.0.1:3000",
+    "image": "/project-screenshots/landing-page.png",
+    "status": "Active",
+    "featured": true,
+    "year": "2025",
     "tags": ["TypeScript", "Next.js", "Tailwind", "React", "Node.js"]
   },
   {
     "id": 2,
     "name": "oWAR",
     "description": "Personal project aimed at analyzing and projecting baseball player performance. It calculates metrics similar to fWAR and bWAR, employing data parsing and traditional machine learning algorithms to assess player value.",
+    "detailed_description": "oWAR is a Python-based project that analyzes baseball player performance using data from Baseball Reference. It calculates key metrics like fWAR and bWAR, and employs machine learning algorithms to project future performance. The project utilizes libraries such as Pandas for data manipulation, scikit-learn for machine learning, and Plotly for data visualization.",
     "html_url": "https://github.com/NairSiddharth/oWAR",
+    "live_url": "",
+    "image": "/project-screenshots/baseball-player.png",
     "status": "In Progress",
+    "featured": false,
+    "year": "2025",
     "tags": ["Python", "scikit-learn", "Jupyter", "Pandas", "Machine Learning", "Plotly"]
   },
   {
     "id": 3,
     "name": "Scentinel",
     "description": "Based off of recent cologne wear, season, and notes in cologne -> suggest a variety of colognes from current collection to potentially wear",
+    "detailed_description": "Scentinel is a machine learning project that recommends colognes based on recent wear patterns, seasonal trends, and fragrance notes. Built using Python and PyTorch, it leverages collaborative filtering and content-based filtering techniques to provide personalized fragrance suggestions. The project utilizes a dataset of cologne attributes and user preferences to train the recommendation model.",
     "html_url": "https://github.com/NairSiddharth/Scentinel",
+    "live_url": "",
+    "image": "/project-screenshots/cologne.png",
     "status": "In Progress",
+    "featured": true,
+    "year": "2025",
     "tags": ["Python", "Pytorch", "Machine Learning"]
   }
 ]
