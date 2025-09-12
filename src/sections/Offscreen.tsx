@@ -443,7 +443,7 @@ export default function Personal() {
     <div className="max-w-7xl mx-auto py-12 px-6 space-y-12">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-heading font-bold">Beyond the Code</h1>
+        <h1 className="text-3xl font-bold">Beyond the Code</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           A glimpse into my life outside of programming - the movies and books I've consumed this year, 
           and special memories from my incredible work experiences and general life adventures!

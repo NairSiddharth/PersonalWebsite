@@ -130,7 +130,6 @@ export default function Experience() {
     return "lg:w-6/12"; // Large (long-term positions)
   };
 
-  // MOVE ALL HOOKS BEFORE ANY CONDITIONAL RETURNS
   
   // First useEffect: Process experiences data
   useEffect(() => {
@@ -255,7 +254,7 @@ export default function Experience() {
       `}</style>
       
       <section id="experience" className="space-y-8 py-12 px-6">
-        <h2 className="font-heading text-3xl text-center mb-12">Experience</h2>
+        <h2 className="font-bold text-3xl text-center mb-12">Experience</h2>
 
         <div className="max-w-7xl mx-auto">
           <div className="relative">

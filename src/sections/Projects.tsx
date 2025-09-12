@@ -202,7 +202,7 @@ export default function Projects() {
     <section id="projects" className="py-12 px-6 max-w-7xl mx-auto">
       {/* Header */}
       <div className="text-center mb-12" data-aos="fade-up">
-        <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
+        <h2 className="text-3xl font-bold mb-4">Project Showcase</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           A showcase of my technical projects, ranging from full-stack applications to data science experiments.
         </p>
