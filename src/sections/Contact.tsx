@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Mail, Linkedin, Github, FileText, Calendar, Clock, MessageSquare, Sparkles, ChevronUp } from "lucide-react";
 import profile from "@/data/profile.json";
+import { getEmail } from "@/lib/email";
 
 interface ContactProps {
   onHide?: () => void;
@@ -86,7 +87,7 @@ export default function Contact({ onHide }: ContactProps) {
               <HoverCard openDelay={300} closeDelay={100}>
                 <HoverCardTrigger asChild>
                   <Button asChild variant="outline" className="w-full">
-                    <a href={`mailto:${profile.email}`}
+                    <a href={`mailto:${getEmail()}`}
                     target="_blank"
                       rel="noopener noreferrer">
                       Send me an email

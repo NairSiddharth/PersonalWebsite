@@ -5,7 +5,7 @@
     "description": "My personal portfolio website built with React, Tailwind, and Cloudflare Pages to keep in touch with frontend skills & have something to show for it.",
     "detailed_description": "This website is built using Next.js and TypeScript, styled with Tailwind CSS, and deployed on Cloudflare Pages. It features a responsive design, dark mode support, and interactive elements to showcase my projects and skills effectively.",
     "html_url": "https://github.com/NairSiddharth/PersonalWebsite",
-    "live_url": "http://127:0.0.1:3000",
+    "live_url": "https://siddharthnair.pages.dev/",
     "image": "/project-screenshots/landing-page.png",
     "status": "Active",
     "featured": true,

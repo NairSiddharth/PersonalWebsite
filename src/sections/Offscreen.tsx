@@ -245,14 +245,14 @@ const booksRead = [
 
 const internshipPhotos = [
   { src: "/863.JPG", alt: "Internship First Day - 1st summer", company: "JPMorganChase", location: "Houston, TX" },
-  { src: "/1339.JPG", alt: "Returning Interns @ Minigolf - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
-  { src: "/1355.JPG", alt: "End of Internship Presentation - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
-  { src: "/1361.JPG", alt: "Pic. w/ other interns on our floor - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1339.jpg", alt: "Returning Interns @ Minigolf - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1355.jpg", alt: "End of Internship Presentation - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
+  { src: "/1361.jpg", alt: "Pic. w/ other interns on our floor - 2nd summer", company: "JPMorganChase", location: "Houston, TX" },
   { src: "/1591.jpg", alt: "End of Internship Celebration - 3rd summer pt. 2", company: "JPMorganChase", location: "Houston, TX" },
   { src: "/IMG_3357.jpg", alt: "Intern Partners - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
   { src: "/IMG_5624.jpg", alt: "Pickleball w/ Interns - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
-  { src: "/IMG_5636.jpg", alt: "Final Supper w/ Interns - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
-  { src: "/TFKU7150.jpg", alt: "Internship Group - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
+  { src: "/IMG_5636.JPG", alt: "Final Supper w/ Interns - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
+  { src: "/TFKU7150.JPG", alt: "Internship Group - 4th summer", company: "JPMorganChase", location: "Plano, TX" },
 ];
 
 const lifeAdventurePhotos = [
@@ -260,8 +260,8 @@ const lifeAdventurePhotos = [
   { src: "/IMG_5118.jpg", alt: "Pretty baseball park", location: "T-Mobile Park", description: "Pretty baseball park" },
   { src: "/IMG_5133.jpg", alt: "Watching the Mariners", location: "T-Mobile Park", description: "Watching the Mariners" },
   { src: "/IMG_5326.jpg", alt: "Some days the view made the hours worthwhile", location: "Penberthy Fields", description: "Some days the view made the hours worthwhile" },
-  { src: "/IMG_5359.jpg", alt: "Look Mom I'm a Photographer Pt. 1", location: "Zach. Engineering Building 1", description: "Look Mom I'm a Photographer Pt. 1" },
-  { src: "/IMG_5360.jpg", alt: "Look Mom I'm a Photographer Pt. 2", location: "Zach. Engineering Building 2", description: "Look Mom I'm a Photographer Pt. 2" },
+  { src: "/IMG_5359.JPG", alt: "Look Mom I'm a Photographer Pt. 1", location: "Zach. Engineering Building 1", description: "Look Mom I'm a Photographer Pt. 1" },
+  { src: "/IMG_5360.JPG", alt: "Look Mom I'm a Photographer Pt. 2", location: "Zach. Engineering Building 2", description: "Look Mom I'm a Photographer Pt. 2" },
   { src: "/IMG_5401.jpg", alt: "Day in the life of Sid the referee", location: "Penberthy Fields", description: "Day in the life of Sid the referee" },
   { src: "/IMG_5409.jpg", alt: "Panorama of sea from Pike Place overview", location: "Panoramic Seattle Seascape", description: "Panorama of sea from Pike Place overview" },
   { src: "/IMG_5433.jpg", alt: "Looking back at Seattle on way to Bainbridge Island", location: "Seattle Skyline", description: "Looking back at Seattle on way to Bainbridge Island" },

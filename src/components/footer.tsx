@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Mail, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profile from "@/data/profile.json";
+import { getEmail } from "@/lib/email";
 
 // Same gradients as navbar for consistency
 const gradients = [
@@ -126,7 +127,7 @@ export default function Footer() {
               size="sm"
               className="relative overflow-hidden group"
             >
-              <a href={`mailto:${profile.email}`} className="flex items-center gap-2">
+              <a href={`mailto:${getEmail()}`} className="flex items-center gap-2">
                 {mounted && (
                   <span 
                     className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
