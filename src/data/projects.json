@@ -14,28 +14,28 @@
   },
   {
     "id": 2,
-    "name": "oWAR",
+    "name": "sWARm",
     "description": "Personal project aimed at analyzing and projecting baseball player performance. It calculates metrics similar to fWAR and bWAR, employing data parsing and traditional machine learning algorithms to assess player value.",
-    "detailed_description": "oWAR is a Python-based project that analyzes baseball player performance using data from Baseball Reference. It calculates key metrics like fWAR and bWAR, and employs machine learning algorithms to project future performance. The project utilizes libraries such as Pandas for data manipulation, scikit-learn for machine learning, and Plotly for data visualization.",
-    "html_url": "https://github.com/NairSiddharth/oWAR",
+    "detailed_description": "sWARm is a Python-based project that analyzes baseball player performance using data from sources like Baseball Savant, Fangraphs and other reputable sources. It attempts to calculate an equivalent to the industry standard WARP/fWAR and employs a variety of machine learning algorithms ranging from basic linear regression to a neural net to project future performance. The project utilizes libraries such as Pandas for data manipulation, scikit-learn and Keras for machine learning, and Plotly for data visualization.",
+    "html_url": "https://github.com/NairSiddharth/sWARm",
     "live_url": "",
     "image": "/project-screenshots/baseball-player.png",
     "status": "In Progress",
-    "featured": false,
+    "featured": true,
     "year": "2025",
-    "tags": ["Python", "scikit-learn", "Jupyter", "Pandas", "Machine Learning", "Plotly"]
+    "tags": ["Python", "scikit-learn", "Jupyter", "Pandas", "Machine Learning", "Plotly", "Keras", "TensorFlow"]
   },
   {
     "id": 3,
     "name": "Scentinel",
     "description": "Based off of recent cologne wear, season, and notes in cologne -> suggest a variety of colognes from current collection to potentially wear",
-    "detailed_description": "Scentinel is a machine learning project that recommends colognes based on recent wear patterns, seasonal trends, and fragrance notes. Built using Python and PyTorch, it leverages collaborative filtering and content-based filtering techniques to provide personalized fragrance suggestions. The project utilizes a dataset of cologne attributes and user preferences to train the recommendation model.",
+    "detailed_description": "Scentinel is a machine learning project that recommends colognes based on recent wear patterns, seasonal trends, and fragrance notes. Built using Python and Scikit Learn, it leverages collaborative filtering and content-based filtering techniques to provide personalized fragrance suggestions. The project utilizes a dataset of cologne attributes and user preferences to train the recommendation model.",
     "html_url": "https://github.com/NairSiddharth/Scentinel",
     "live_url": "",
     "image": "/project-screenshots/cologne.png",
-    "status": "In Progress",
+    "status": "Active",
     "featured": true,
     "year": "2025",
-    "tags": ["Python", "Pytorch", "Machine Learning"]
+    "tags": ["Python", "scikit-learn", "Machine Learning", "Tailwind", "Full-Stack", "SQL", "Plotly", "FastAPI"]
   }
 ]
